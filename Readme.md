@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [Денис Левчев](https://up.htmlacademy.ru/javascript/28/user/2194201).
-* Наставник: `Неизвестно`.
+- Студент: [Денис Левчев](https://up.htmlacademy.ru/javascript/28/user/2194201).
+- Наставник: [Павел Позняк](https://htmlacademy.ru/profile/id907403).
 
 ---
 
