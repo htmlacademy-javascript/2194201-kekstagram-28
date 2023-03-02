@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const isStringLength = (string, length) => {
   return string.length <= length;
 };
@@ -31,3 +32,28 @@ const getNumber = (string) => {
 };
 
 // console.log(getNumber("2023 год"));
+=======
+const checkLimit = (string, length) => string.length <= length;
+
+const isPalindrome = (string) => {
+  string = string.toLowerCase().replaceAll(' ', '');
+  return string === string.split('').reverse().join('');
+};
+
+const extractNumber = (string) => {
+  string = String(string).replace(/\D/g, '');
+  return parseInt(string, 10);
+};
+
+const getPadString = (string, minLength, pad) => {
+  while (string.length < minLength) {
+    string = pad.slice(0, minLength - string.length) + string;
+  }
+  return string;
+};
+
+checkLimit('проверяемая строка', 20);
+isPalindrome('топот');
+extractNumber('2023 год');
+getPadString('q', 4, 'we');
+>>>>>>> ca24d7b586a130ff0e8b9748ef3b1b618c55f775
