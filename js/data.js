@@ -1,3 +1,5 @@
+import { getRandomInteger, getRandomArrayElement } from './utils.js';
+
 const PHOTO_COUNT = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
@@ -26,13 +28,27 @@ const DESCRIPTIONS = [
   'Купил новый фотоаппарат, оцените снимок.'
 ];
 
-export {
-  PHOTO_COUNT,
-  MIN_LIKES,
-  MAX_LIKES,
-  MIN_COMMENTS,
-  MAX_COMMENTS,
-  NAMES,
-  COMMENTS,
-  DESCRIPTIONS
+let commentId = 1;
+let photoId = 1;
+
+const createMessage = () => {
+  const message = Array.from({ length: getRandomInteger(1, 2) }, () => getRandomArrayElement(COMMENTS));
+  return [...new Set(message)].join(' ');
 };
+
+const createComment = () => ({
+  id: commentId++,
+  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+  message: createMessage(),
+  name: getRandomArrayElement(NAMES),
+});
+
+const createPhoto = () => ({
+  id: photoId,
+  url: `photos/${photoId++}.jpg`,
+  description: getRandomArrayElement(DESCRIPTIONS),
+  likes: getRandomInteger(MIN_LIKES, MAX_LIKES),
+  comments: Array.from({ length: getRandomInteger(MIN_COMMENTS, MAX_COMMENTS) }, createComment),
+});
+
+export const createPhotos = () => Array.from({ length: PHOTO_COUNT }, createPhoto);
