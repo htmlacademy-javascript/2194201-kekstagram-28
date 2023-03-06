@@ -1,4 +1,4 @@
-import { createItemFragment } from './rendering.js';
+import { getPhoto } from './rendering.js';
 import './rendering.js';
 
-createItemFragment();
+getPhoto();
