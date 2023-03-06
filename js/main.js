@@ -1,3 +1,4 @@
-import { createPhotos } from './data.js';
+import { createItemFragment } from './rendering.js';
+import './rendering.js';
 
-createPhotos();
+createItemFragment();
