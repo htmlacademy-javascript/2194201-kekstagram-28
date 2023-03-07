@@ -1,6 +1,6 @@
 import { createPhotos } from './data.js';
 
-const photoContainer = document.querySelector('.pictures');
+export const photoContainer = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const photoData = createPhotos();
 
