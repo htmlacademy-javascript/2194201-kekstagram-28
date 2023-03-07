@@ -1,4 +1,4 @@
-import { photoContainer } from './render-photos.js';
+import { photoData, photoContainer } from './render-photos.js';
 import { isEscapeKey } from './utils.js';
 
 const photoFullContainer = document.querySelector('.big-picture');
@@ -7,6 +7,18 @@ const photoFullContainer = document.querySelector('.big-picture');
 // const likesCount = document.querySelector('.likes-count');
 // const commentsCount = document.querySelector('.comments-count');
 // const commentsList = document.querySelector('.social__comments');
+
+const findPhoto = (image) => {
+  const srcImage = new URL(image.src).pathname.slice(1);
+
+  photoData.map((item) => {
+    if (srcImage === item.url) {
+      photoFullContainer.querySelector('img').src = item.url;
+      console.log('url');
+    }
+
+  });
+};
 
 const hiddenFullPhoto = () => {
   photoFullContainer.classList.add('hidden');
@@ -25,6 +37,9 @@ const showFullPhoto = (evt) => {
 
     photoFullContainer.addEventListener('click', onHiddenFullPhoto);
     document.addEventListener('keydown', onDocumentKeydown);
+
+    findPhoto(evt.target.closest('.picture__img'));
+    // console.log(photoData, evt.target.closest('.picture__img'));
   }
 };
 

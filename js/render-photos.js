@@ -2,7 +2,7 @@ import { createPhotos } from './data.js';
 
 export const photoContainer = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const photoData = createPhotos();
+export const photoData = createPhotos();
 
 const createPhoto = (photo) => {
   const photoClone = photoTemplate.cloneNode(true);
