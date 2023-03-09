@@ -1,6 +1,8 @@
 import { createPhotos } from './data.js';
+import { addListeners } from './show-full-photo.js';
 
 export const photoContainer = document.querySelector('.pictures');
+export const photoCollection = photoContainer.children;
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 export const photoData = createPhotos();
 
@@ -14,5 +16,8 @@ const createPhoto = (photo) => {
 };
 
 export const renderPhotos = () => {
-  photoData.forEach((item) => photoContainer.append(createPhoto(item)));
+  photoData.forEach((item) => {
+    photoContainer.append(createPhoto(item));
+    addListeners(item);
+  });
 };
