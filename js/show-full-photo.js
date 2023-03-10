@@ -1,45 +1,43 @@
-import { photoCollection } from './render-photos.js';
 import { isEscapeKey } from './utils.js';
 
-const photoFullContainer = document.querySelector('.big-picture');
-const closeModalButton = document.querySelector('#picture-cancel');
+const bigPhotoContainer = document.querySelector('.big-picture');
+const bigPhotoCloseButton = document.querySelector('#picture-cancel');
 
-let list = 2;
+export const fillPhotoData = (data) => {
+  bigPhotoContainer.querySelector('img').src = data.url;
+  bigPhotoContainer.querySelector('.social__caption').textContent = data.description;
+  bigPhotoContainer.querySelector('.likes-count').textContent = data.likes;
+  bigPhotoContainer.querySelector('.comments-count').textContent = data.comments.length;
+};
 
-const closeModal = () => {
-  photoFullContainer.classList.add('hidden');
+const closeBigPhoto = () => {
+  bigPhotoContainer.classList.add('hidden');
+  bigPhotoContainer.querySelector('.social__comment-count').classList.remove('hidden');
+  bigPhotoContainer.querySelector('.comments-loader').classList.remove('hidden');
   document.body.classList.remove('modal-open');
 
-  closeModalButton.removeEventListener('click', closeModal);
+  bigPhotoCloseButton.removeEventListener('click', closeBigPhoto);
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
-const openModal = (evt) => {
-  evt.preventDefault();
-
-  photoFullContainer.classList.remove('hidden');
+const openBigPhoto = () => {
+  bigPhotoContainer.classList.remove('hidden');
+  bigPhotoContainer.querySelector('.social__comment-count').classList.add('hidden');
+  bigPhotoContainer.querySelector('.comments-loader').classList.add('hidden');
   document.body.classList.add('modal-open');
-  closeModalButton.addEventListener('click', closeModal);
+
+  bigPhotoCloseButton.addEventListener('click', closeBigPhoto);
   document.addEventListener('keydown', onDocumentKeydown);
+};
+
+export const onPhotoClick = (evt) => {
+  evt.preventDefault();
+  openBigPhoto();
 };
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeModal();
+    closeBigPhoto();
   }
 }
-
-const fillPhotoData = (item) => {
-  photoFullContainer.querySelector('img').src = item.url;
-  photoFullContainer.querySelector('.social__caption').textContent = item.description;
-  photoFullContainer.querySelector('.likes-count').textContent = item.likes;
-  photoFullContainer.querySelector('.comments-count').textContent = item.comments.length;
-};
-
-export const addListeners = (item) => {
-  photoCollection[list++].addEventListener('click', (evt) => {
-    openModal(evt);
-    fillPhotoData(item);
-  });
-};
