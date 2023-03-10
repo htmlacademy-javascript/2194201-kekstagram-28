@@ -1,13 +1,26 @@
 import { isEscapeKey } from './utils.js';
 
 const bigPhotoContainer = document.querySelector('.big-picture');
-const bigPhotoCloseButton = document.querySelector('#picture-cancel');
+const bigPhotoCloseButton = document.querySelector('.big-picture__cancel');
+const commentsList = document.querySelector('.social__comments');
+const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
+
+const fillCommentsData = (comment) => {
+  const commentClone = commentTemplate.cloneNode(true);
+  commentClone.querySelector('.social__picture').src = comment.avatar;
+  commentClone.querySelector('.social__picture').alt = comment.name;
+  commentClone.querySelector('.social__text').textContent = comment.message;
+  return commentClone;
+};
 
 export const fillPhotoData = (data) => {
   bigPhotoContainer.querySelector('img').src = data.url;
   bigPhotoContainer.querySelector('.social__caption').textContent = data.description;
   bigPhotoContainer.querySelector('.likes-count').textContent = data.likes;
   bigPhotoContainer.querySelector('.comments-count').textContent = data.comments.length;
+
+  commentsList.innerHTML = '';
+  data.comments.forEach((comment) => commentsList.append(fillCommentsData(comment)));
 };
 
 const closeBigPhoto = () => {

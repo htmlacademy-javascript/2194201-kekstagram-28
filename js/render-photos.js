@@ -1,5 +1,5 @@
 import { createPhotos } from './data.js';
-import { onPhotoClick, fillPhotoData } from './show-full-photo.js';
+import { onPhotoClick, fillPhotoData } from './open-big-photo.js';
 
 export const photoContainer = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
