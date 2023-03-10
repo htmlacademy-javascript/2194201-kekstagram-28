@@ -13,7 +13,7 @@ const fillCommentsData = (comment) => {
   return commentClone;
 };
 
-export const fillPhotoData = (data) => {
+const fillPhotoData = (data) => {
   bigPhotoContainer.querySelector('img').src = data.url;
   bigPhotoContainer.querySelector('.social__caption').textContent = data.description;
   bigPhotoContainer.querySelector('.likes-count').textContent = data.likes;
@@ -43,9 +43,10 @@ const openBigPhoto = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-export const onPhotoClick = (evt) => {
+export const onPhotoClick = (evt, photo) => {
   evt.preventDefault();
   openBigPhoto();
+  fillPhotoData(photo);
 };
 
 function onDocumentKeydown(evt) {

@@ -1,5 +1,5 @@
 import { createPhotos } from './data.js';
-import { onPhotoClick, fillPhotoData } from './open-big-photo.js';
+import { onPhotoClick } from './open-big-photo.js';
 
 export const photoContainer = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -12,10 +12,7 @@ const createPhoto = (photo) => {
   photoClone.querySelector('.picture__likes').textContent = photo.likes;
   photoClone.querySelector('.picture__comments').textContent = photo.comments.length;
 
-  photoClone.addEventListener('click', (evt) => {
-    onPhotoClick(evt);
-    fillPhotoData(photo);
-  });
+  photoClone.addEventListener('click', (evt) => onPhotoClick(evt, photo));
 
   return photoClone;
 };
