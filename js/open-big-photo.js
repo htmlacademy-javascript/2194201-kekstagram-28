@@ -13,14 +13,14 @@ const fillCommentsData = (comment) => {
   return commentClone;
 };
 
-const fillPhotoData = (data) => {
-  bigPhotoContainer.querySelector('img').src = data.url;
-  bigPhotoContainer.querySelector('.social__caption').textContent = data.description;
-  bigPhotoContainer.querySelector('.likes-count').textContent = data.likes;
-  bigPhotoContainer.querySelector('.comments-count').textContent = data.comments.length;
+const fillPhotoData = (photo) => {
+  bigPhotoContainer.querySelector('img').src = photo.url;
+  bigPhotoContainer.querySelector('.social__caption').textContent = photo.description;
+  bigPhotoContainer.querySelector('.likes-count').textContent = photo.likes;
+  bigPhotoContainer.querySelector('.comments-count').textContent = photo.comments.length;
 
   commentsList.innerHTML = '';
-  data.comments.forEach((comment) => commentsList.append(fillCommentsData(comment)));
+  photo.comments.forEach((comment) => commentsList.append(fillCommentsData(comment)));
 };
 
 const closeBigPhoto = () => {
