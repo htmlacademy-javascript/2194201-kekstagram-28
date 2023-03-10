@@ -12,7 +12,10 @@ const createPhoto = (photo) => {
   photoClone.querySelector('.picture__likes').textContent = photo.likes;
   photoClone.querySelector('.picture__comments').textContent = photo.comments.length;
 
-  photoClone.addEventListener('click', (evt) => onPhotoClick(evt, photo));
+  photoClone.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    onPhotoClick(photo);
+  });
 
   return photoClone;
 };
