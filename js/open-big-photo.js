@@ -4,7 +4,12 @@ const bigPhotoContainer = document.querySelector('.big-picture');
 const bigPhotoCloseButton = document.querySelector('.big-picture__cancel');
 const loadCommentsButton = document.querySelector('.social__comments-loader');
 const commentsList = document.querySelector('.social__comments');
+const commentsCurrent = document.querySelector('.comments-current');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
+
+const RENDER_COMMENTS = 5;
+let countComments = 0;
+let commentsTemp;
 
 const fillCommentData = (comment) => {
   const commentClone = commentTemplate.cloneNode(true);
@@ -15,7 +20,31 @@ const fillCommentData = (comment) => {
 };
 
 const renderComments = (comments) => {
-  comments.forEach((comment) => commentsList.append(fillCommentData(comment)));
+  let countLoadMore = 0;
+
+  if (!commentsTemp) {
+    commentsTemp = comments;
+  }
+
+  commentsTemp.forEach((comment, index) => {
+
+    if (countLoadMore < RENDER_COMMENTS &&
+      countComments < commentsTemp.length &&
+      countComments <= index) {
+
+      commentsList.append(fillCommentData(comment));
+      countComments++;
+      countLoadMore++;
+
+      if (countComments === commentsTemp.length) {
+        loadCommentsButton.classList.add('hidden');
+      }
+
+      console.log(countComments, countLoadMore);
+    }
+
+  });
+  commentsCurrent.textContent = countComments;
 };
 
 const fillPhotoData = (photo) => {
@@ -31,6 +60,7 @@ const fillPhotoData = (photo) => {
 const closeBigPhoto = () => {
   bigPhotoContainer.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  loadCommentsButton.classList.remove('hidden');
 
   loadCommentsButton.removeEventListener('click', onLoadCommentsButtonClick);
   bigPhotoCloseButton.removeEventListener('click', onBigPhotoCloseButtonClick);
@@ -38,6 +68,9 @@ const closeBigPhoto = () => {
 };
 
 const openBigPhoto = () => {
+  countComments = 0;
+  commentsTemp = '';
+
   bigPhotoContainer.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
@@ -48,6 +81,7 @@ const openBigPhoto = () => {
 
 function onLoadCommentsButtonClick(evt) {
   evt.preventDefault();
+  renderComments();
 }
 
 function onBigPhotoCloseButtonClick(evt) {

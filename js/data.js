@@ -4,7 +4,7 @@ const PHOTO_COUNT = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 const MIN_COMMENTS = 1;
-const MAX_COMMENTS = 7;
+const MAX_COMMENTS = 16;
 
 const NAMES = [
   'Алиса', 'Евгений', 'Елена', 'Роман', 'Светлана', 'Сергей', 'Юлия'
