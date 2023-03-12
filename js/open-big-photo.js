@@ -9,6 +9,7 @@ const commentTemplate = document.querySelector('#comment').content.querySelector
 
 const RENDER_COMMENTS = 5;
 let countComments = 0;
+let commentsLength = 0;
 let commentsTemp;
 
 const fillCommentData = (comment) => {
@@ -19,32 +20,31 @@ const fillCommentData = (comment) => {
   return commentClone;
 };
 
+const fillCommentsCurrent = (counter) => {
+  commentsCurrent.textContent = counter;
+};
+
+const removeLoadButton = () => loadCommentsButton.classList.add('hidden');
+
 const renderComments = (comments) => {
-  let countLoadMore = 0;
 
   if (!commentsTemp) {
-    commentsTemp = comments;
+    commentsLength = comments.length;
+    commentsTemp = Array.from(comments);
   }
 
-  commentsTemp.forEach((comment, index) => {
+  const renderingComments = commentsTemp.splice(0, RENDER_COMMENTS < commentsTemp.length ? RENDER_COMMENTS : commentsTemp.length);
 
-    if (countLoadMore < RENDER_COMMENTS &&
-      countComments < commentsTemp.length &&
-      countComments <= index) {
-
-      commentsList.append(fillCommentData(comment));
-      countComments++;
-      countLoadMore++;
-
-      if (countComments === commentsTemp.length) {
-        loadCommentsButton.classList.add('hidden');
-      }
-
-      console.log(countComments, countLoadMore);
-    }
-
+  renderingComments.forEach((comment) => {
+    commentsList.append(fillCommentData(comment));
+    countComments++;
   });
-  commentsCurrent.textContent = countComments;
+
+  fillCommentsCurrent(countComments);
+
+  if (countComments === commentsLength) {
+    removeLoadButton();
+  }
 };
 
 const fillPhotoData = (photo) => {
