@@ -24,7 +24,7 @@ const fillCommentsCurrent = (counter) => {
   commentsCurrent.textContent = counter;
 };
 
-const removeLoadButton = () => loadCommentsButton.classList.add('hidden');
+const removeLoadCommentsButton = () => loadCommentsButton.classList.add('hidden');
 
 const renderComments = (comments) => {
 
@@ -43,7 +43,7 @@ const renderComments = (comments) => {
   fillCommentsCurrent(countComments);
 
   if (countComments === commentsLength) {
-    removeLoadButton();
+    removeLoadCommentsButton();
   }
 };
 
