@@ -3,7 +3,6 @@ import { isEscapeKey } from './utils.js';
 const editPhotoForm = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
 const editPhotoCloseButton = document.querySelector('.img-upload__cancel');
-// const imageForm = document.querySelector('.img-upload__preview>img');
 
 const openEditPhotoForm = () => {
   editPhotoForm.classList.remove('hidden');
