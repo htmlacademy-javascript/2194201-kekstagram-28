@@ -1417,15 +1417,18 @@ main {
   display: none;
 }
 
+.img-upload__field-wrapper {
+  position: relative;
+}
+
 .img-upload__error {
-  position: fixed;
-  right: 27px;
+  position: absolute;
+  right: 0;
+  left: 0;
   text-transform: none;
-  background-color: rgb(211, 0, 0);
-  max-width: 222px;
   line-height: 1;
   font-size: 12px;
-  padding: 10px;
-  bottom: 10px;
-  text-align: left;
+  bottom: 100%;
+  margin: 0 auto 3px;
+  color: #ffe753;
 }
