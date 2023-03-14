@@ -1,24 +1,25 @@
 import { isEscapeKey } from './utils.js';
+import { hashTagField, descriptionField } from './form-validation.js';
 
-const editPhotoForm = document.querySelector('.img-upload__overlay');
+const editPhotoContainer = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
-const editPhotoCloseButton = document.querySelector('.img-upload__cancel');
+const editPhotoContainerCloseButton = document.querySelector('.img-upload__cancel');
 
-const openEditPhotoForm = () => {
-  editPhotoForm.classList.remove('hidden');
+const openEditPhotoContainer = () => {
+  editPhotoContainer.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
-  editPhotoCloseButton.addEventListener('click', onEditPhotoCloseButtonClick);
+  editPhotoContainerCloseButton.addEventListener('click', onEditPhotoCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
 const closeEditPhotoForm = () => {
   uploadPhotoInput.value = '';
 
-  editPhotoForm.classList.add('hidden');
+  editPhotoContainer.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
-  editPhotoCloseButton.removeEventListener('click', onEditPhotoCloseButtonClick);
+  editPhotoContainerCloseButton.removeEventListener('click', onEditPhotoCloseButtonClick);
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
@@ -29,11 +30,11 @@ function onEditPhotoCloseButtonClick(evt) {
 
 function onUploadPhotoChange(evt) {
   evt.preventDefault();
-  openEditPhotoForm();
+  openEditPhotoContainer();
 }
 
 function onDocumentKeydown(evt) {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && !hashTagField.matches(':focus') && !descriptionField.matches(':focus')) {
     evt.preventDefault();
     closeEditPhotoForm();
   }
