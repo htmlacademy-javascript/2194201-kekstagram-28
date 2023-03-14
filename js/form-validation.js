@@ -2,34 +2,23 @@ const editPhotoForm = document.querySelector('.img-upload__form');
 const hashTagField = document.querySelector('.text__hashtags');
 const descriptionField = document.querySelector('.text__description');
 const regExp = /^#[a-zа-яё0-9]{1,19}$/i;
-const pristine = new Pristine(editPhotoForm, {}, false);
 const MAX_HASH_TAGS = 5;
+const messageErrorHagTag = 'Не более 5 уникальных хэштэгов, длина каждого < 20 символов. Должен начинаться с # и состоять из букв или цифр!';
 
-const setMessageErrorHashTags = (message) => hashTagField.setCustomValidity(message);
+const pristine = new Pristine(editPhotoForm, {
+  classTo: 'img-upload__field-wrapper',
+  errorClass: 'img-upload__field-wrapper--invalid',
+  successClass: 'img-upload__field-wrapper--valid',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextTag: 'span',
+  errorTextClass: 'img-upload__error',
+});
 
-const checkHashTagRegExp = (hashTag) => {
-  const checkHashTag = !regExp.test(hashTag);
-  if (checkHashTag) {
-    setMessageErrorHashTags('Хэштег начинается с #, состоит из букв и чисел, длина < 20 символов');
-  }
-  return checkHashTag;
-};
+const checkHashTagRegExp = (hashTag) => !regExp.test(hashTag);
 
-const checkHashTagSame = (hashTags) => {
-  const checkSame = hashTags.some((item, index) => hashTags.indexOf(item.toLowerCase()) !== index);
-  if (checkSame) {
-    setMessageErrorHashTags('Одинаковые хэштэги недопустимы');
-  }
-  return checkSame;
-};
+const checkHashTagSame = (hashTags) => hashTags.some((item, index) => hashTags.indexOf(item.toLowerCase()) !== index);
 
-const checkHashTagsLength = (hashTags) => {
-  const checkLength = hashTags.length > MAX_HASH_TAGS;
-  if (checkLength) {
-    setMessageErrorHashTags('Разрешено добавлять не более 5 хэштэгов');
-  }
-  return checkLength;
-};
+const checkHashTagsLength = (hashTags) => hashTags.length > MAX_HASH_TAGS;
 
 const validateHashTags = () => {
   const hashTags = hashTagField.value.trim().split(' ');
@@ -41,10 +30,9 @@ const validateHashTags = () => {
 function onEditPhotoFormSubmit(evt) {
   if (!pristine.validate()) {
     evt.preventDefault();
-    hashTagField.reportValidity();
   }
 }
 
-pristine.addValidator(hashTagField, validateHashTags);
+pristine.addValidator(hashTagField, validateHashTags, messageErrorHagTag);
 
 editPhotoForm.addEventListener('submit', onEditPhotoFormSubmit);
