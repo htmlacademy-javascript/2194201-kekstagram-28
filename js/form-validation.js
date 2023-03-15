@@ -1,5 +1,5 @@
 const editPhotoForm = document.querySelector('.img-upload__form');
-export const hashTagField = document.querySelector('.text__hashtags');
+const hashTagField = document.querySelector('.text__hashtags');
 
 const REG_EXP = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASH_TAGS = 5;
