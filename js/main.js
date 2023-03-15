@@ -1,4 +1,5 @@
 import { renderPhotos } from './render-photos.js';
-import './upload-photo.js';
+import { initUploadPhotoActions } from './upload-photo.js';
 
 renderPhotos();
+initUploadPhotoActions();
