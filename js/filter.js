@@ -10,11 +10,11 @@ const changeZoomPhoto = () => {
   photo.style.transform = `scale(${parseInt(zoomInput.value, 10) / 100})`;
 };
 
-const zoomOutPhoto = () => {
+const zoomOutValue = () => {
   zoomInput.value = `${parseInt(zoomInput.value, 10) - 25}%`;
 };
 
-const zoomInPhoto = () => {
+const zoomInValue = () => {
   zoomInput.value = `${parseInt(zoomInput.value, 10) + 25}%`;
 };
 
@@ -22,7 +22,7 @@ function onZoomOutButtonClick(evt) {
   evt.preventDefault();
 
   if (parseInt(zoomInput.value, 10) > MIN_ZOOM) {
-    zoomOutPhoto();
+    zoomOutValue();
     changeZoomPhoto();
   }
 }
@@ -31,7 +31,7 @@ function onZoomInButtonClick(evt) {
   evt.preventDefault();
 
   if (parseInt(zoomInput.value, 10) < MAX_ZOOM) {
-    zoomInPhoto();
+    zoomInValue();
     changeZoomPhoto();
   }
 }
