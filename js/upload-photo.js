@@ -1,6 +1,6 @@
 import { isEscapeKey } from './utils.js';
 import { validate } from './form-validation.js';
-import { initFilterPhotoActions, deInitFilterPhotoActions, resetPhotoStyles } from './filter.js';
+import { initFilterPhotoActions, deInitFilterPhotoActions, resetPhotoStyles } from './filters-photo.js';
 
 const editPhotoContainer = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
