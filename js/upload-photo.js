@@ -1,5 +1,6 @@
 import { isEscapeKey } from './utils.js';
 import { validate } from './form-validation.js';
+import { initFilterPhotoActions, deInitFilterPhotoActions, resetPhotoStyles } from './filters-photo.js';
 
 const editPhotoContainer = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
@@ -29,17 +30,22 @@ const closeEditPhotoContainer = () => {
 function onEditPhotoCloseButtonClick(evt) {
   evt.preventDefault();
   closeEditPhotoContainer();
+  deInitFilterPhotoActions();
+  resetPhotoStyles();
 }
 
 function onUploadPhotoChange(evt) {
   evt.preventDefault();
   openEditPhotoContainer();
+  initFilterPhotoActions();
 }
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt) && !hashTagField.matches(':focus') && !descriptionField.matches(':focus')) {
     evt.preventDefault();
     closeEditPhotoContainer();
+    deInitFilterPhotoActions();
+    resetPhotoStyles();
   }
 }
 
