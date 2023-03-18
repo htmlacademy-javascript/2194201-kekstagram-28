@@ -80,7 +80,7 @@ const zoomInValue = () => {
   zoomInput.value = `${parseInt(zoomInput.value, 10) + 25}%`;
 };
 
-const updateOptionsSlider = (min, max, step) => {
+const updateOptionsSlider = (min = 0, max = 100, step = 1) => {
   levelSlider.noUiSlider.updateOptions({
     range: {
       min: min,
@@ -127,7 +127,7 @@ function onFilterItemChange(evt) {
   if (evt.target.closest('.effects__radio')) {
     const filter = evt.target.value;
     updateFilter(filter);
-    updateOptionsSlider(filtersSettings?.[filter]?.min ?? 0, filtersSettings?.[filter]?.max ?? 100, filtersSettings?.[filter]?.step ?? 1);
+    updateOptionsSlider(filtersSettings?.[filter]?.min, filtersSettings?.[filter]?.max, filtersSettings?.[filter]?.step);
   }
 }
 
