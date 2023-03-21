@@ -17,14 +17,6 @@ const addErrorMessage = (element) => document.body.append(element);
 
 const removeErrorMessage = (element) => setTimeout(() => element.remove(), REMOVE_TIME);
 
-export const createErrorMessage = (message) => {
-  const div = document.createElement('div');
-  div.classList.add('error-message');
-  div.textContent = message;
-  addErrorMessage(div);
-  removeErrorMessage(div);
-};
-
 const load = (route, errorText, method = Method.GET, body = null) =>
   fetch(BASE_URL + route, { method, body })
     .then((response) => {
@@ -37,4 +29,14 @@ const load = (route, errorText, method = Method.GET, body = null) =>
       throw new Error(errorText);
     });
 
+export const createErrorMessage = (message) => {
+  const div = document.createElement('div');
+  div.classList.add('error-message');
+  div.textContent = message;
+  addErrorMessage(div);
+  removeErrorMessage(div);
+};
+
 export const getData = () => load(Route.GET_DATA, ErrorText.GET_DATA);
+
+export const sendData = (body) => load(Route.SEND_DATA, ErrorText.SEND_DATA, Method.POST, body);

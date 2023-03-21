@@ -1,6 +1,8 @@
 import { isEscapeKey } from './utils.js';
 import { validate } from './form-validation.js';
 import { initFilterPhotoActions, deInitFilterPhotoActions, resetPhotoStyles } from './filters-photo.js';
+import { sendData } from './api.js';
+import { onError, onSuccess } from './messages.js';
 
 const editPhotoContainer = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
@@ -8,6 +10,12 @@ const editPhotoContainerCloseButton = document.querySelector('.img-upload__cance
 const editPhotoForm = document.querySelector('.img-upload__form');
 const hashTagField = document.querySelector('.text__hashtags');
 const descriptionField = document.querySelector('.text__description');
+const submitButton = document.querySelector('.img-upload__submit');
+
+const SubmitButtonText = {
+  DEFAULT: 'Опубликовать',
+  SENDING: 'Загружаю...'
+};
 
 const openEditPhotoContainer = () => {
   editPhotoContainer.classList.remove('hidden');
@@ -17,7 +25,7 @@ const openEditPhotoContainer = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-const closeEditPhotoContainer = () => {
+export const closeEditPhotoContainer = () => {
   uploadPhotoInput.value = '';
 
   editPhotoContainer.classList.add('hidden');
@@ -25,6 +33,16 @@ const closeEditPhotoContainer = () => {
 
   editPhotoContainerCloseButton.removeEventListener('click', onEditPhotoCloseButtonClick);
   document.removeEventListener('keydown', onDocumentKeydown);
+};
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.DEFAULT;
 };
 
 function onEditPhotoCloseButtonClick(evt) {
@@ -50,8 +68,13 @@ function onDocumentKeydown(evt) {
 }
 
 function onEditPhotoFormSubmit(evt) {
+  evt.preventDefault();
   if (validate()) {
-    evt.preventDefault();
+    blockSubmitButton();
+    sendData(new FormData(evt.target))
+      .then(onSuccess)
+      .catch(onError)
+      .finally(unblockSubmitButton);
   }
 }
 
