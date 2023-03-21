@@ -2,7 +2,7 @@ import { isEscapeKey } from './utils.js';
 import { validate } from './form-validation.js';
 import { initFilterPhotoActions, deInitFilterPhotoActions, resetPhotoStyles } from './filters-photo.js';
 import { sendData } from './api.js';
-import { onError, onSuccess } from './messages.js';
+import { showErrorMessage, showSuccessMessage } from './fetch-messages.js';
 
 const editPhotoContainer = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
@@ -59,12 +59,22 @@ function onUploadPhotoChange(evt) {
 }
 
 function onDocumentKeydown(evt) {
-  if (isEscapeKey(evt) && !hashTagField.matches(':focus') && !descriptionField.matches(':focus')) {
+  if (isEscapeKey(evt) && !hashTagField.matches(':focus') && !descriptionField.matches(':focus') && !document.querySelector('.error')) {
     evt.preventDefault();
     closeEditPhotoContainer();
     deInitFilterPhotoActions();
     resetPhotoStyles();
   }
+}
+
+function onError() {
+  showErrorMessage();
+}
+
+function onSuccess() {
+  closeEditPhotoContainer();
+  resetPhotoStyles();
+  showSuccessMessage();
 }
 
 function onEditPhotoFormSubmit(evt) {

@@ -1,5 +1,6 @@
 import { renderPhotos } from './render-photos.js';
-import { getData, createErrorMessage } from './api.js';
+import { getData } from './api.js';
+import { createErrorLoadMessage } from './fetch-messages.js';
 import { initUploadPhotoActions } from './upload-photo.js';
 
 getData()
@@ -7,7 +8,7 @@ getData()
     renderPhotos(photos);
   })
   .catch((err) => {
-    createErrorMessage(err.message);
+    createErrorLoadMessage(err.message);
   }
   );
 
