@@ -1,15 +1,14 @@
 import { renderPhotos } from './render-photos.js';
-import { getData } from './api.js';
+import { getData, createErrorMessage } from './api.js';
 import { initUploadPhotoActions } from './upload-photo.js';
 
 getData()
   .then((photos) => {
     renderPhotos(photos);
   })
-  .catch(
-    (err) => {
-      console.error(err.message);
-    }
+  .catch((err) => {
+    createErrorMessage(err.message);
+  }
   );
 
 initUploadPhotoActions();

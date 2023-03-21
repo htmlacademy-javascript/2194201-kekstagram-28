@@ -1432,3 +1432,17 @@ main {
   margin: 0 auto 3px;
   color: #ffe753;
 }
+
+.error-message {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #cc0000;
+  padding: 6px 15px;
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: none;
+}
