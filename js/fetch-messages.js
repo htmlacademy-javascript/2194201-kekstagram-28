@@ -4,41 +4,41 @@ const errorTemplate = document.querySelector('#error').content.querySelector('.e
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 
 const removeErrorMessage = () => {
-  document.removeEventListener('keydown', onErrorMessageSubmitKeydown);
-  document.querySelector('.error').removeEventListener('click', onErrorSubmitMessageClick);
+  document.removeEventListener('keydown', onErrorMessageKeydown);
+  document.querySelector('.error').removeEventListener('click', onErrorMessageClick);
 
   document.querySelector('.error').remove();
 };
 
 const removeSuccessMessage = () => {
-  document.removeEventListener('keydown', onSuccessMessageSubmitKeydown);
-  document.querySelector('.success').removeEventListener('click', onSuccessSubmitMessageClick);
+  document.removeEventListener('keydown', onSuccessMessageKeydown);
+  document.querySelector('.success').removeEventListener('click', onSuccessMessageClick);
 
   document.querySelector('.success').remove();
 };
 
-function onErrorMessageSubmitKeydown(evt) {
+function onErrorMessageKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     removeErrorMessage();
   }
 }
 
-function onSuccessMessageSubmitKeydown(evt) {
+function onSuccessMessageKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     removeSuccessMessage();
   }
 }
 
-function onErrorSubmitMessageClick(evt) {
+function onErrorMessageClick(evt) {
   evt.preventDefault();
   if (evt.target.matches('.error') || evt.target.closest('.error__button')) {
     removeErrorMessage();
   }
 }
 
-function onSuccessSubmitMessageClick(evt) {
+function onSuccessMessageClick(evt) {
   evt.preventDefault();
   if (evt.target.matches('.success') || evt.target.closest('.success__button')) {
     removeSuccessMessage();
@@ -54,18 +54,18 @@ export const createErrorLoadMessage = (message) => {
   renderMessage(div);
 };
 
-export const createErrorSubmitMessage = () => {
+export const createErrorMessage = () => {
   const errorMessage = errorTemplate.cloneNode(true);
   renderMessage(errorMessage);
 
-  document.addEventListener('keydown', onErrorMessageSubmitKeydown);
-  document.querySelector('.error').addEventListener('click', onErrorSubmitMessageClick);
+  document.addEventListener('keydown', onErrorMessageKeydown);
+  document.querySelector('.error').addEventListener('click', onErrorMessageClick);
 };
 
-export const createSuccessSubmitMessage = () => {
+export const createSuccessMessage = () => {
   const successMessage = successTemplate.cloneNode(true);
   renderMessage(successMessage);
 
-  document.addEventListener('keydown', onSuccessMessageSubmitKeydown);
-  document.querySelector('.success').addEventListener('click', onSuccessSubmitMessageClick);
+  document.addEventListener('keydown', onSuccessMessageKeydown);
+  document.querySelector('.success').addEventListener('click', onSuccessMessageClick);
 };
