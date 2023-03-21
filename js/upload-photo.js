@@ -2,7 +2,7 @@ import { isEscapeKey } from './utils.js';
 import { validate } from './form-validation.js';
 import { initFilterPhotoActions, deInitFilterPhotoActions, resetPhotoStyles } from './filters-photo.js';
 import { sendData } from './api.js';
-import { showErrorMessage, showSuccessMessage } from './fetch-messages.js';
+import { createErrorSubmitMessage, createSuccessSubmitMessage } from './fetch-messages.js';
 
 const editPhotoContainer = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
@@ -68,13 +68,13 @@ function onDocumentKeydown(evt) {
 }
 
 function onError() {
-  showErrorMessage();
+  createErrorSubmitMessage();
 }
 
 function onSuccess() {
   closeEditPhotoContainer();
   resetPhotoStyles();
-  showSuccessMessage();
+  createSuccessSubmitMessage();
 }
 
 function onEditPhotoFormSubmit(evt) {

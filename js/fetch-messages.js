@@ -4,68 +4,68 @@ const errorTemplate = document.querySelector('#error').content.querySelector('.e
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 
 const removeErrorMessage = () => {
-  document.removeEventListener('keydown', onErrorMessageKeydown);
-  document.querySelector('.error').removeEventListener('click', onErrorMessageClick);
+  document.removeEventListener('keydown', onErrorMessageSubmitKeydown);
+  document.querySelector('.error').removeEventListener('click', onErrorSubmitMessageClick);
 
   document.querySelector('.error').remove();
 };
 
 const removeSuccessMessage = () => {
-  document.removeEventListener('keydown', onSuccessMessageKeydown);
-  document.querySelector('.success').removeEventListener('click', onSuccessMessageClick);
+  document.removeEventListener('keydown', onSuccessMessageSubmitKeydown);
+  document.querySelector('.success').removeEventListener('click', onSuccessSubmitMessageClick);
 
   document.querySelector('.success').remove();
 };
 
-function onErrorMessageKeydown(evt) {
+function onErrorMessageSubmitKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     removeErrorMessage();
   }
 }
 
-function onSuccessMessageKeydown(evt) {
+function onSuccessMessageSubmitKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     removeSuccessMessage();
   }
 }
 
-function onErrorMessageClick(evt) {
+function onErrorSubmitMessageClick(evt) {
   evt.preventDefault();
   if (evt.target.matches('.error') || evt.target.closest('.error__button')) {
     removeErrorMessage();
   }
 }
 
-function onSuccessMessageClick(evt) {
+function onSuccessSubmitMessageClick(evt) {
   evt.preventDefault();
   if (evt.target.matches('.success') || evt.target.closest('.success__button')) {
     removeSuccessMessage();
   }
 }
 
-const showErrorLoadMessage = (element) => document.body.append(element);
+const renderMessage = (element) => document.body.append(element);
 
 export const createErrorLoadMessage = (message) => {
   const div = document.createElement('div');
   div.classList.add('error-message');
   div.textContent = message;
-  showErrorLoadMessage(div);
+  renderMessage(div);
 };
 
-export const showErrorMessage = () => {
+export const createErrorSubmitMessage = () => {
   const errorClone = errorTemplate.cloneNode(true);
-  document.body.append(errorClone);
+  renderMessage(errorClone);
 
-  document.addEventListener('keydown', onErrorMessageKeydown);
-  document.querySelector('.error').addEventListener('click', onErrorMessageClick);
+  document.addEventListener('keydown', onErrorMessageSubmitKeydown);
+  document.querySelector('.error').addEventListener('click', onErrorSubmitMessageClick);
 };
 
-export const showSuccessMessage = () => {
+export const createSuccessSubmitMessage = () => {
   const successMessage = successTemplate.cloneNode(true);
-  document.body.append(successMessage);
+  renderMessage(successMessage);
 
-  document.addEventListener('keydown', onSuccessMessageKeydown);
-  document.querySelector('.success').addEventListener('click', onSuccessMessageClick);
+  document.addEventListener('keydown', onSuccessMessageSubmitKeydown);
+  document.querySelector('.success').addEventListener('click', onSuccessSubmitMessageClick);
 };
