@@ -55,8 +55,8 @@ export const createErrorLoadMessage = (message) => {
 };
 
 export const createErrorSubmitMessage = () => {
-  const errorClone = errorTemplate.cloneNode(true);
-  renderMessage(errorClone);
+  const errorMessage = errorTemplate.cloneNode(true);
+  renderMessage(errorMessage);
 
   document.addEventListener('keydown', onErrorMessageSubmitKeydown);
   document.querySelector('.error').addEventListener('click', onErrorSubmitMessageClick);
