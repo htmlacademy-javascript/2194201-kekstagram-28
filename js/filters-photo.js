@@ -6,6 +6,8 @@ const filterList = document.querySelector('.img-upload__effects');
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const levelSlider = document.querySelector('.effect-level__slider');
 const levelFilter = document.querySelector('.effect-level__value');
+const hashTagField = document.querySelector('.text__hashtags');
+const descriptionField = document.querySelector('.text__description');
 
 const MIN_ZOOM = 25;
 const MAX_ZOOM = 100;
@@ -145,6 +147,8 @@ export const resetPhotoStyles = () => {
   photo.style = null;
   sliderContainer.classList.add('hidden');
   filterList.querySelector('#effect-none').checked = true;
+  hashTagField.value = '';
+  descriptionField.value = '';
   typeEffect = '';
   typeUnit = '';
 };
