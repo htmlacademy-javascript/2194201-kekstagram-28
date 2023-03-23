@@ -1,10 +1,12 @@
-import { getRandomInteger, debounce } from './utils.js';
+import { getRandomInteger } from './utils.js';
 import { renderPhotos } from './render-photos.js';
 
 const MAX_RANDOM_PHOTOS = 10;
 const RERENDER_DELAY = 500;
 const sortPhotosSection = document.querySelector('.img-filters');
 const sortButtons = document.querySelectorAll('.img-filters__button');
+
+let timeoutId;
 
 const removePhotos = () => {
   const photosElements = document.querySelectorAll('.picture');
@@ -13,13 +15,13 @@ const removePhotos = () => {
 
 const sortingRandom = (photos) => {
   const photosTemp = Array.from(photos);
-  const photosClone = [];
+  const photosRandom = [];
 
   for (let i = 0; i < MAX_RANDOM_PHOTOS; i++) {
-    photosClone.push(photosTemp.splice(getRandomInteger(0, photosTemp.length - 1), 1)[0]);
+    photosRandom.push(photosTemp.splice(getRandomInteger(0, photosTemp.length - 1), 1)[0]);
   }
 
-  return photosClone;
+  return photosRandom;
 };
 
 const chooseActiveButton = (sortType) => {
@@ -32,9 +34,8 @@ const chooseActiveButton = (sortType) => {
   });
 };
 
-function onSortButtonClick(sortType, photos) {
+const updatePhotos = (sortType, photos) => {
   removePhotos();
-  chooseActiveButton(sortType);
 
   switch (sortType) {
     case 'filter-default':
@@ -46,6 +47,13 @@ function onSortButtonClick(sortType, photos) {
     case 'filter-discussed':
       break;
   }
+};
+
+function onSortButtonClick(sortType, photos) {
+  chooseActiveButton(sortType);
+
+  clearTimeout(timeoutId);
+  timeoutId = setTimeout(() => updatePhotos(sortType, photos), RERENDER_DELAY);
 }
 
 export const initSortPhotosActions = (photos) => {
@@ -53,9 +61,6 @@ export const initSortPhotosActions = (photos) => {
 
   sortButtons.forEach((button) => button.addEventListener('click', (evt) => {
     evt.preventDefault();
-
-    let timeoutId;
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => onSortButtonClick(button.getAttribute('id'), photos), RERENDER_DELAY);
+    onSortButtonClick(button.getAttribute('id'), photos);
   }));
 };
