@@ -47,20 +47,21 @@ const updatePhotos = (sortType, photos) => {
   }
 };
 
-function onSortButtonClick(sortType) {
+function onSortButtonClick(sortType, callback) {
   chooseActiveButton(sortType);
+  callback();
 }
 
 export const initSortPhotosActions = (photos) => {
   sortPhotosSection.classList.remove('img-filters--inactive');
 
   sortButtons.forEach((button) => {
-    const rerenderTimer = debounce(() => updatePhotos(button.getAttribute('id'), photos), RERENDER_DELAY);
+    const sortType = button.getAttribute('id');
+    const rerenderTimer = debounce(() => updatePhotos(sortType, photos), RERENDER_DELAY);
 
     button.addEventListener('click', (evt) => {
       evt.preventDefault();
-      onSortButtonClick(button.getAttribute('id'));
-      rerenderTimer();
+      onSortButtonClick(sortType, rerenderTimer);
     });
   });
 };
