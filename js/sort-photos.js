@@ -37,14 +37,13 @@ const updatePhotos = (sortType, photos) => {
   removePhotos();
 
   switch (sortType) {
-    case 'filter-default':
-      renderPhotos(photos);
-      break;
     case 'filter-random':
       renderPhotos(sortingRandom(photos));
       break;
     case 'filter-discussed':
       break;
+    default:
+      renderPhotos(photos);
   }
 };
 
