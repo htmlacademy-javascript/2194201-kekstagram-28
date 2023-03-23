@@ -12,7 +12,7 @@ const removePhotos = () => {
   photosElements.forEach((element) => element.remove());
 };
 
-const sortingRandom = (photos) => {
+const sortRandom = (photos) => {
   const photosTemp = Array.from(photos);
   const photosRandom = [];
 
@@ -22,6 +22,10 @@ const sortingRandom = (photos) => {
 
   return photosRandom;
 };
+
+const compareComments = (commentA, commentB) => commentB.comments.length - commentA.comments.length;
+
+const sortDiscussed = (photos) => photos.slice().sort(compareComments);
 
 const chooseActiveButton = (sortType) => {
   sortButtons.forEach((button) => {
@@ -38,9 +42,10 @@ const updatePhotos = (sortType, photos) => {
 
   switch (sortType) {
     case 'filter-random':
-      renderPhotos(sortingRandom(photos));
+      renderPhotos(sortRandom(photos));
       break;
     case 'filter-discussed':
+      renderPhotos(sortDiscussed(photos));
       break;
     default:
       renderPhotos(photos);
@@ -57,11 +62,11 @@ export const initSortPhotosActions = (photos) => {
 
   sortButtons.forEach((button) => {
     const sortType = button.getAttribute('id');
-    const rerenderTimer = debounce(() => updatePhotos(sortType, photos), RERENDER_DELAY);
+    const rerenderTimeout = debounce(() => updatePhotos(sortType, photos), RERENDER_DELAY);
 
     button.addEventListener('click', (evt) => {
       evt.preventDefault();
-      onSortButtonClick(sortType, rerenderTimer);
+      onSortButtonClick(sortType, rerenderTimeout);
     });
   });
 };
