@@ -1,12 +1,11 @@
 import { getRandomInteger } from './utils.js';
 import { renderPhotos } from './render-photos.js';
+import { debounce } from './utils.js';
 
 const MAX_RANDOM_PHOTOS = 10;
 const RERENDER_DELAY = 500;
 const sortPhotosSection = document.querySelector('.img-filters');
 const sortButtons = document.querySelectorAll('.img-filters__button');
-
-let timeoutId;
 
 const removePhotos = () => {
   const photosElements = document.querySelectorAll('.picture');
@@ -49,18 +48,20 @@ const updatePhotos = (sortType, photos) => {
   }
 };
 
-function onSortButtonClick(sortType, photos) {
+function onSortButtonClick(sortType) {
   chooseActiveButton(sortType);
-
-  clearTimeout(timeoutId);
-  timeoutId = setTimeout(() => updatePhotos(sortType, photos), RERENDER_DELAY);
 }
 
 export const initSortPhotosActions = (photos) => {
   sortPhotosSection.classList.remove('img-filters--inactive');
 
-  sortButtons.forEach((button) => button.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    onSortButtonClick(button.getAttribute('id'), photos);
-  }));
+  sortButtons.forEach((button) => {
+    const rerenderTimer = debounce(() => updatePhotos(button.getAttribute('id'), photos), RERENDER_DELAY);
+
+    button.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      onSortButtonClick(button.getAttribute('id'));
+      rerenderTimer();
+    });
+  });
 };
