@@ -13,14 +13,8 @@ const removePhotos = () => {
 };
 
 const sortRandom = (photos) => {
-  const photosTemp = Array.from(photos);
-  const photosRandom = [];
-
-  for (let i = 0; i < MAX_RANDOM_PHOTOS; i++) {
-    photosRandom.push(...photosTemp.splice(getRandomInteger(0, photosTemp.length - 1), 1));
-  }
-
-  return photosRandom;
+  const photosTemp = [...photos];
+  return Array.from({ length: MAX_RANDOM_PHOTOS }, () => photosTemp.splice(getRandomInteger(0, photosTemp.length - 1), 1)[0]);
 };
 
 const compareComments = (itemA, itemB) => itemB.comments.length - itemA.comments.length;
