@@ -18,7 +18,6 @@ const sortRandom = (photos) => {
 
   for (let i = 0; i < MAX_RANDOM_PHOTOS; i++) {
     photosRandom.push(...photosTemp.splice(getRandomInteger(0, photosTemp.length - 1), 1));
-    console.log(photosRandom);
   }
 
   return photosRandom;
