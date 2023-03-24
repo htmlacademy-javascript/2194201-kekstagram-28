@@ -1,6 +1,6 @@
 import { onPhotoClick } from './open-big-photo.js';
 
-export const photoContainer = document.querySelector('.pictures');
+const photoContainer = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 const createPhoto = (photo) => {
