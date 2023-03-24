@@ -23,7 +23,7 @@ const sortRandom = (photos) => {
   return photosRandom;
 };
 
-const compareComments = (commentA, commentB) => commentB.comments.length - commentA.comments.length;
+const compareComments = (itemA, itemB) => itemB.comments.length - itemA.comments.length;
 
 const sortDiscussed = (photos) => photos.slice().sort(compareComments);
 
