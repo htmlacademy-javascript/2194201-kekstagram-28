@@ -1,4 +1,3 @@
-import { getRandomInteger } from './utils.js';
 import { renderPhotos } from './render-photos.js';
 import { debounce } from './utils.js';
 
@@ -12,10 +11,10 @@ const removePhotos = () => {
   photosElements.forEach((element) => element.remove());
 };
 
-const sortRandom = (photos) => {
-  const photosTemp = [...photos];
-  return Array.from({ length: MAX_RANDOM_PHOTOS }, () => photosTemp.splice(getRandomInteger(0, photosTemp.length - 1), 1)[0]);
-};
+const sortRandom = (photos) => photos
+  .slice()
+  .sort(() => Math.random() - 0.5)
+  .slice(0, MAX_RANDOM_PHOTOS);
 
 const compareComments = (itemA, itemB) => itemB.comments.length - itemA.comments.length;
 
