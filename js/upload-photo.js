@@ -1,8 +1,9 @@
 import { isEscapeKey } from './utils.js';
 import { validate } from './form-validation.js';
-import { initFilterPhotoActions, deInitFilterPhotoActions, resetPhotoStyles } from './filters-photo.js';
+import { deInitFilterPhotoActions, resetPhotoStyles } from './filters-photo.js';
 import { sendData } from './api.js';
 import { createErrorMessage, createSuccessMessage } from './fetch-messages.js';
+import { insertPhotoInContainer } from './check-file-types.js';
 
 const editPhotoContainer = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
@@ -17,15 +18,7 @@ const SubmitButtonText = {
   SENDING: 'Загружаю...'
 };
 
-const openEditPhotoContainer = () => {
-  editPhotoContainer.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-
-  editPhotoContainerCloseButton.addEventListener('click', onEditPhotoCloseButtonClick);
-  document.addEventListener('keydown', onDocumentKeydown);
-};
-
-export const closeEditPhotoContainer = () => {
+const closeEditPhotoContainer = () => {
   uploadPhotoInput.value = '';
 
   editPhotoContainer.classList.add('hidden');
@@ -54,8 +47,7 @@ function onEditPhotoCloseButtonClick(evt) {
 
 function onUploadPhotoChange(evt) {
   evt.preventDefault();
-  openEditPhotoContainer();
-  initFilterPhotoActions();
+  insertPhotoInContainer();
 }
 
 function onDocumentKeydown(evt) {
@@ -89,5 +81,13 @@ function onEditPhotoFormSubmit(evt) {
 }
 
 editPhotoForm.addEventListener('submit', onEditPhotoFormSubmit);
+
+export const openEditPhotoContainer = () => {
+  editPhotoContainer.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+
+  editPhotoContainerCloseButton.addEventListener('click', onEditPhotoCloseButtonClick);
+  document.addEventListener('keydown', onDocumentKeydown);
+};
 
 export const initUploadPhotoActions = () => uploadPhotoInput.addEventListener('change', onUploadPhotoChange);

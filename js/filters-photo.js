@@ -1,7 +1,7 @@
 const zoomOutButton = document.querySelector('.scale__control--smaller');
 const zoomInButton = document.querySelector('.scale__control--bigger');
 const zoomInput = document.querySelector('.scale__control--value');
-const photo = document.querySelector('.img-upload__preview>img');
+const photoElement = document.querySelector('.img-upload__preview>img');
 const filterList = document.querySelector('.img-upload__effects');
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const levelSlider = document.querySelector('.effect-level__slider');
@@ -71,7 +71,7 @@ noUiSlider.create(levelSlider, {
 });
 
 const changeZoomPhoto = () => {
-  photo.style.transform = `scale(${parseInt(zoomInput.value, 10) / 100})`;
+  photoElement.style.transform = `scale(${parseInt(zoomInput.value, 10) / 100})`;
 };
 
 const zoomOutValue = () => {
@@ -96,14 +96,14 @@ const updateOptionsSlider = (min = 0, max = 100, step = 1) => {
 const updateFilter = (filter) => {
   typeEffect = filtersSettings?.[filter]?.css ?? '';
   typeUnit = filtersSettings?.[filter]?.unit ?? '';
-  photo.className = '';
+  photoElement.className = '';
 
   if (filter !== 'none') {
     sliderContainer.classList.remove('hidden');
-    photo.classList.add(`effects__preview--${filter}`);
+    photoElement.classList.add(`effects__preview--${filter}`);
   } else {
     sliderContainer.classList.add('hidden');
-    photo.style.filter = null;
+    photoElement.style.filter = null;
   }
 };
 
@@ -136,15 +136,15 @@ function onFilterItemChange(evt) {
 function onLevelSliderUpdate() {
   const valueCurrent = levelSlider.noUiSlider.get();
   levelFilter.value = valueCurrent;
-  photo.style.filter = `${typeEffect}(${valueCurrent + typeUnit})`;
+  photoElement.style.filter = `${typeEffect}(${valueCurrent + typeUnit})`;
 }
 
 levelSlider.noUiSlider.on('update', onLevelSliderUpdate);
 
 export const resetPhotoStyles = () => {
   zoomInput.value = '100%';
-  photo.className = '';
-  photo.style = null;
+  photoElement.className = '';
+  photoElement.style = null;
   sliderContainer.classList.add('hidden');
   filterList.querySelector('#effect-none').checked = true;
   hashTagField.value = '';

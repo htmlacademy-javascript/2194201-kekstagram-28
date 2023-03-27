@@ -1,6 +1,6 @@
 import { renderPhotos } from './render-photos.js';
 import { getData } from './api.js';
-import { createErrorLoadMessage } from './fetch-messages.js';
+import { createErrorElement } from './utils.js';
 import { initUploadPhotoActions } from './upload-photo.js';
 import { initSortPhotosActions } from './sort-photos.js';
 
@@ -10,7 +10,7 @@ getData()
     initSortPhotosActions(photos);
   })
   .catch((err) => {
-    createErrorLoadMessage(err.message);
+    createErrorElement(err.message);
   }
   );
 
