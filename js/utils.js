@@ -1,5 +1,3 @@
-import { renderMessage } from './fetch-messages.js';
-
 export const getRandomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 export const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
@@ -14,6 +12,8 @@ export const debounce = (callback, timeoutDelay) => {
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 };
+
+export const renderMessage = (element) => document.body.append(element);
 
 export const createErrorElement = (message) => {
   const div = document.createElement('div');

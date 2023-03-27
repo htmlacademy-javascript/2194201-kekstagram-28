@@ -1,4 +1,4 @@
-import { isEscapeKey } from './utils.js';
+import { isEscapeKey, renderMessage } from './utils.js';
 
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -44,8 +44,6 @@ function onSuccessMessageClick(evt) {
     removeSuccessMessage();
   }
 }
-
-export const renderMessage = (element) => document.body.append(element);
 
 export const createErrorMessage = () => {
   const errorMessage = errorTemplate.cloneNode(true);
