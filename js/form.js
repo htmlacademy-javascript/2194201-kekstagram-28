@@ -52,31 +52,33 @@ const hiddenEditPhoto = () => {
   resetPhotoStyles();
 };
 
+const onUploadPhotoChange = (evt) => {
+  evt.preventDefault();
+  insertPhotoInImageElement();
+};
+
+const onEditPhotoFormSubmit = (evt) => {
+  evt.preventDefault();
+
+  if (validate()) {
+    blockSubmitButton();
+
+    sendData(new FormData(evt.target))
+      .then(createSuccessMessage)
+      .catch(createErrorMessage)
+      .finally(unblockSubmitButton);
+  }
+};
+
 function onEditPhotoCloseButtonClick(evt) {
   evt.preventDefault();
   hiddenEditPhoto();
-}
-
-function onUploadPhotoChange(evt) {
-  evt.preventDefault();
-  insertPhotoInImageElement();
 }
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt) && !hashTagInput.matches(':focus') && !descriptionInput.matches(':focus') && !document.querySelector('.error')) {
     evt.preventDefault();
     hiddenEditPhoto();
-  }
-}
-
-function onEditPhotoFormSubmit(evt) {
-  evt.preventDefault();
-  if (validate()) {
-    blockSubmitButton();
-    sendData(new FormData(evt.target))
-      .then(createSuccessMessage)
-      .catch(createErrorMessage)
-      .finally(unblockSubmitButton);
   }
 }
 

@@ -46,10 +46,10 @@ const updatePhotos = (sortType, photos) => {
   }
 };
 
-function onSortButtonClick(sortType, callback) {
+const onSortButtonClick = (sortType, callback) => {
   chooseActiveButton(sortType);
   callback();
-}
+};
 
 const initSortPhotosActions = (photos) => {
   sortPhotosElement.classList.remove('img-filters--inactive');

@@ -119,37 +119,37 @@ const resetPhotoStyles = () => {
   typeUnit = '';
 };
 
-function onZoomOutButtonClick(evt) {
+const onZoomOutButtonClick = (evt) => {
   evt.preventDefault();
 
   if (parseInt(zoomInput.value, 10) > MIN_ZOOM) {
     zoomOutValue();
     changeZoomPhoto();
   }
-}
+};
 
-function onZoomInButtonClick(evt) {
+const onZoomInButtonClick = (evt) => {
   evt.preventDefault();
 
   if (parseInt(zoomInput.value, 10) < MAX_ZOOM) {
     zoomInValue();
     changeZoomPhoto();
   }
-}
+};
 
-function onFilterItemChange(evt) {
+const onFilterItemChange = (evt) => {
   if (evt.target.closest('.effects__radio')) {
     const filter = evt.target.value.toUpperCase();
     updateFilter(filter);
     updateOptionsSlider(FilterSettings?.[filter]?.MIN, FilterSettings?.[filter]?.MAX, FilterSettings?.[filter]?.STEP);
   }
-}
+};
 
-function onLevelSliderUpdate() {
+const onLevelSliderUpdate = () => {
   const valueCurrent = levelSliderElement.noUiSlider.get();
   levelFilterElement.value = valueCurrent;
   imageElement.style.filter = `${typeEffect}(${valueCurrent + typeUnit})`;
-}
+};
 
 const initFilterPhotoActions = () => {
   zoomOutButton.addEventListener('click', onZoomOutButtonClick);

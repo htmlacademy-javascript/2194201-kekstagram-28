@@ -3,10 +3,10 @@ import { showBigPhotoElement, fillPhotoData } from './big-photo.js';
 const imageElement = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-function onPhotoClick(photo) {
+const onPhotoClick = (photo) => {
   showBigPhotoElement();
   fillPhotoData(photo);
-}
+};
 
 const createPhoto = (photo) => {
   const photoClone = photoTemplate.cloneNode(true);
