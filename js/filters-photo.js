@@ -41,7 +41,7 @@ const FilterSettings = {
 const zoomOutButton = document.querySelector('.scale__control--smaller');
 const zoomInButton = document.querySelector('.scale__control--bigger');
 const zoomInput = document.querySelector('.scale__control--value');
-const photoElement = document.querySelector('.img-upload__preview>img');
+const imageElement = document.querySelector('.img-upload__preview>img');
 const filterListElement = document.querySelector('.img-upload__effects');
 const sliderElement = document.querySelector('.img-upload__effect-level');
 const levelSliderElement = document.querySelector('.effect-level__slider');
@@ -71,7 +71,7 @@ noUiSlider.create(levelSliderElement, {
 });
 
 const changeZoomPhoto = () => {
-  photoElement.style.transform = `scale(${parseInt(zoomInput.value, 10) / 100})`;
+  imageElement.style.transform = `scale(${parseInt(zoomInput.value, 10) / 100})`;
 };
 
 const zoomOutValue = () => {
@@ -96,14 +96,14 @@ const updateOptionsSlider = (min = 0, max = 100, step = 1) => {
 const updateFilter = (filter) => {
   typeEffect = FilterSettings?.[filter]?.CSS ?? '';
   typeUnit = FilterSettings?.[filter]?.UNIT ?? '';
-  photoElement.className = '';
+  imageElement.className = '';
 
   if (filter.toLowerCase() !== 'none') {
     sliderElement.classList.remove('hidden');
-    photoElement.classList.add(`effects__preview--${filter}`);
+    imageElement.classList.add(`effects__preview--${filter}`);
   } else {
     sliderElement.classList.add('hidden');
-    photoElement.style.filter = null;
+    imageElement.style.filter = null;
   }
 };
 
@@ -136,15 +136,15 @@ function onFilterItemChange(evt) {
 function onLevelSliderUpdate() {
   const valueCurrent = levelSliderElement.noUiSlider.get();
   levelFilterElement.value = valueCurrent;
-  photoElement.style.filter = `${typeEffect}(${valueCurrent + typeUnit})`;
+  imageElement.style.filter = `${typeEffect}(${valueCurrent + typeUnit})`;
 }
 
 levelSliderElement.noUiSlider.on('update', onLevelSliderUpdate);
 
 export const resetPhotoStyles = () => {
   zoomInput.value = '100%';
-  photoElement.className = '';
-  photoElement.style = null;
+  imageElement.className = '';
+  imageElement.style = null;
   sliderElement.classList.add('hidden');
   filterListElement.querySelector('#effect-none').checked = true;
   hashTagInput.value = '';

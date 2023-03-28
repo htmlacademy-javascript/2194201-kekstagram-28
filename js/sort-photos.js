@@ -8,8 +8,8 @@ const sortPhotosElement = document.querySelector('.img-filters');
 const sortButtons = document.querySelectorAll('.img-filters__button');
 
 const removePhotos = () => {
-  const photoElements = document.querySelectorAll('.picture');
-  photoElements.forEach((element) => element.remove());
+  const imageElements = document.querySelectorAll('.picture');
+  imageElements.forEach((element) => element.remove());
 };
 
 const sortRandom = (photos) => photos

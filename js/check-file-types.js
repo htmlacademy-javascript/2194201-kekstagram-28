@@ -7,7 +7,7 @@ const FILE_TYPES_ERROR_MESSAGE = 'Допустимы только файлы и�
 const FILE_TYPES_ERROR_TIMER = 5000;
 
 const uploadPhotoInput = document.querySelector('.img-upload__input');
-const photoElement = document.querySelector('.img-upload__preview>img');
+const imageElement = document.querySelector('.img-upload__preview>img');
 
 const removeErrorElementTimeout = debounce(() => removeErrorElement(), FILE_TYPES_ERROR_TIMER);
 
@@ -21,7 +21,7 @@ export const insertPhotoInContainer = () => {
     openEditPhotoContainer();
     initFilterPhotoActions();
 
-    photoElement.src = URL.createObjectURL(file);
+    imageElement.src = URL.createObjectURL(file);
   } else {
     createErrorElement(FILE_TYPES_ERROR_MESSAGE);
     removeErrorElementTimeout();

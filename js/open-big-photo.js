@@ -7,7 +7,7 @@ let commentsTemp;
 
 const bigPhotoElement = document.querySelector('.big-picture');
 const bigPhotoCloseButton = document.querySelector('.big-picture__cancel');
-const photoElement = document.querySelector('.big-picture__img>img');
+const imageElement = document.querySelector('.big-picture__img>img');
 const descriptionElement = document.querySelector('.social__caption');
 const likesElement = document.querySelector('.likes-count');
 const commentsCountElement = document.querySelector('.comments-count');
@@ -52,7 +52,7 @@ const renderComments = (comments) => {
 };
 
 const fillPhotoData = (photo) => {
-  photoElement.src = photo.url;
+  imageElement.src = photo.url;
   descriptionElement.textContent = photo.description;
   likesElement.textContent = photo.likes;
   commentsCountElement.textContent = photo.comments.length;
