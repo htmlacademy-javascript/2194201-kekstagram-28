@@ -11,13 +11,13 @@ const imageElement = document.querySelector('.img-upload__preview>img');
 
 const removeErrorElementTimeout = debounce(() => removeErrorElement(), FILE_TYPES_ERROR_TIMER);
 
-const checkFileType = (fileName) => FILE_TYPES.some((item) => fileName.endsWith(item));
+const checkFileTypes = (fileName) => FILE_TYPES.some((item) => fileName.endsWith(item));
 
 export const insertPhotoInContainer = () => {
   const file = uploadPhotoInput.files[0];
   const fileName = file.name.toLowerCase();
 
-  if (checkFileType(fileName)) {
+  if (checkFileTypes(fileName)) {
     openEditPhotoContainer();
     initFilterPhotoActions();
 
