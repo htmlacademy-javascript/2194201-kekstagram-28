@@ -1,5 +1,5 @@
 import { createErrorElement, removeErrorElement, debounce } from './utils.js';
-import { showEditPhotoElement } from './upload-photo.js';
+import { showEditPhotoElement } from './form-upload.js';
 import { initFilterPhotoActions } from './filters-photo.js';
 
 const FILE_TYPES = ['gif', 'png', 'jpeg', 'jpg'];
