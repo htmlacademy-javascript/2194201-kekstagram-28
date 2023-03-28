@@ -25,8 +25,9 @@ const validateHashTags = () => {
   return !hashTagInput.value.length ? isValid : !isValid;
 };
 
-pristine.addValidator(hashTagInput, validateHashTags, MESSAGE_ERROR_HASH_TAG);
+const addValidator = () => pristine.addValidator(hashTagInput, validateHashTags, MESSAGE_ERROR_HASH_TAG);
 
-const validate = () => pristine.validate();
+const resetPristine = () => pristine.reset();
+const validatePristine = () => pristine.validate();
 
-export { validate };
+export { addValidator, validatePristine, resetPristine };

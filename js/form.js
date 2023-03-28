@@ -1,14 +1,11 @@
 import { isEscapeKey } from './utils.js';
-import { validate } from './validation.js';
-import { deInitFilterPhotoActions, resetPhotoStyles } from './filters.js';
+import { addValidator, validatePristine, resetPristine } from './form-validation.js';
+import { initFiltersActions, createSlider, resetPhotoStyles, resetSlider } from './filters.js';
 import { sendData } from './api.js';
 import { createErrorMessage, createSuccessMessage } from './messages.js';
 import { insertPhotoInImageElement } from './check-file-types.js';
-
-const SubmitButtonText = {
-  DEFAULT: 'Опубликовать',
-  SENDING: 'Загружаю...'
-};
+import { activateScale } from './form-scale.js';
+import { resetFilterStyles } from './filters.js';
 
 const editPhotoElement = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
@@ -22,45 +19,34 @@ const showEditPhotoElement = () => {
   editPhotoElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
-  editPhotoCloseButton.addEventListener('click', onEditPhotoCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
 const hiddenEditPhotoElement = () => {
-  uploadPhotoInput.value = '';
+  editPhotoForm.reset();
+  resetFilterStyles();
+  resetPhotoStyles();
+  resetPristine();
+  resetSlider();
 
   editPhotoElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
-  editPhotoCloseButton.removeEventListener('click', onEditPhotoCloseButtonClick);
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
-  submitButton.textContent = SubmitButtonText.SENDING;
 };
 
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
-  submitButton.textContent = SubmitButtonText.DEFAULT;
-};
-
-const hiddenEditPhoto = () => {
-  hiddenEditPhotoElement();
-  deInitFilterPhotoActions();
-  resetPhotoStyles();
-};
-
-const onUploadPhotoChange = (evt) => {
-  evt.preventDefault();
-  insertPhotoInImageElement();
 };
 
 const onEditPhotoFormSubmit = (evt) => {
   evt.preventDefault();
 
-  if (validate()) {
+  if (validatePristine()) {
     blockSubmitButton();
 
     sendData(new FormData(evt.target))
@@ -70,21 +56,26 @@ const onEditPhotoFormSubmit = (evt) => {
   }
 };
 
-function onEditPhotoCloseButtonClick(evt) {
-  evt.preventDefault();
-  hiddenEditPhoto();
-}
+const onUploadPhotoChange = () => insertPhotoInImageElement();
+
+const onEditPhotoCloseButtonClick = () => hiddenEditPhotoElement();
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt) && !hashTagInput.matches(':focus') && !descriptionInput.matches(':focus') && !document.querySelector('.error')) {
     evt.preventDefault();
-    hiddenEditPhoto();
+    hiddenEditPhotoElement();
   }
 }
 
-const initUploadPhotoActions = () => {
+const initFormActions = () => {
   uploadPhotoInput.addEventListener('change', onUploadPhotoChange);
   editPhotoForm.addEventListener('submit', onEditPhotoFormSubmit);
+  editPhotoCloseButton.addEventListener('click', onEditPhotoCloseButtonClick);
+
+  activateScale();
+  addValidator();
+  createSlider();
+  initFiltersActions();
 };
 
-export { initUploadPhotoActions, showEditPhotoElement, hiddenEditPhoto };
+export { initFormActions, showEditPhotoElement, hiddenEditPhotoElement };

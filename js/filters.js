@@ -1,5 +1,3 @@
-const MIN_ZOOM = 25;
-const MAX_ZOOM = 100;
 let typeEffect = '';
 let typeUnit = '';
 
@@ -38,48 +36,33 @@ const FilterSettings = {
   },
 };
 
-const zoomOutButton = document.querySelector('.scale__control--smaller');
-const zoomInButton = document.querySelector('.scale__control--bigger');
-const zoomInput = document.querySelector('.scale__control--value');
-const imageElement = document.querySelector('.img-upload__preview>img');
+const imageElement = document.querySelector('.img-upload__preview img');
 const filterListElement = document.querySelector('.img-upload__effects');
 const sliderElement = document.querySelector('.img-upload__effect-level');
 const levelSliderElement = document.querySelector('.effect-level__slider');
 const levelFilterElement = document.querySelector('.effect-level__value');
-const hashTagInput = document.querySelector('.text__hashtags');
-const descriptionInput = document.querySelector('.text__description');
 
-noUiSlider.create(levelSliderElement, {
-  range: {
-    min: 0,
-    max: 100,
-  },
-  start: 100,
-  step: 1,
-  connect: 'lower',
-  format: {
-    to: function (value) {
-      if (Number.isInteger(value)) {
-        return value.toFixed(0);
-      }
-      return value.toFixed(1);
+const createSlider = () => {
+  noUiSlider.create(levelSliderElement, {
+    range: {
+      min: 0,
+      max: 100,
     },
-    from: function (value) {
-      return parseFloat(value);
+    start: 100,
+    step: 1,
+    connect: 'lower',
+    format: {
+      to: function (value) {
+        if (Number.isInteger(value)) {
+          return value.toFixed(0);
+        }
+        return value.toFixed(1);
+      },
+      from: function (value) {
+        return parseFloat(value);
+      },
     },
-  },
-});
-
-const changeZoomPhoto = () => {
-  imageElement.style.transform = `scale(${parseInt(zoomInput.value, 10) / 100})`;
-};
-
-const zoomOutValue = () => {
-  zoomInput.value = `${parseInt(zoomInput.value, 10) - 25}%`;
-};
-
-const zoomInValue = () => {
-  zoomInput.value = `${parseInt(zoomInput.value, 10) + 25}%`;
+  });
 };
 
 const updateOptionsSlider = (min = 0, max = 100, step = 1) => {
@@ -107,35 +90,17 @@ const updateFilter = (filter) => {
   }
 };
 
-const resetPhotoStyles = () => {
-  zoomInput.value = '100%';
-  imageElement.className = '';
-  imageElement.style = null;
-  sliderElement.classList.add('hidden');
-  filterListElement.querySelector('#effect-none').checked = true;
-  hashTagInput.value = '';
-  descriptionInput.value = '';
+const resetFilterStyles = () => {
   typeEffect = '';
   typeUnit = '';
 };
 
-const onZoomOutButtonClick = (evt) => {
-  evt.preventDefault();
-
-  if (parseInt(zoomInput.value, 10) > MIN_ZOOM) {
-    zoomOutValue();
-    changeZoomPhoto();
-  }
+const resetPhotoStyles = () => {
+  imageElement.className = '';
+  imageElement.style = null;
 };
 
-const onZoomInButtonClick = (evt) => {
-  evt.preventDefault();
-
-  if (parseInt(zoomInput.value, 10) < MAX_ZOOM) {
-    zoomInValue();
-    changeZoomPhoto();
-  }
-};
+const resetSlider = () => sliderElement.classList.add('hidden');
 
 const onFilterItemChange = (evt) => {
   if (evt.target.closest('.effects__radio')) {
@@ -151,17 +116,9 @@ const onLevelSliderUpdate = () => {
   imageElement.style.filter = `${typeEffect}(${valueCurrent + typeUnit})`;
 };
 
-const initFilterPhotoActions = () => {
-  zoomOutButton.addEventListener('click', onZoomOutButtonClick);
-  zoomInButton.addEventListener('click', onZoomInButtonClick);
+const initFiltersActions = () => {
   filterListElement.addEventListener('change', onFilterItemChange);
   levelSliderElement.noUiSlider.on('update', onLevelSliderUpdate);
 };
 
-const deInitFilterPhotoActions = () => {
-  zoomOutButton.removeEventListener('click', onZoomOutButtonClick);
-  zoomInButton.removeEventListener('click', onZoomInButtonClick);
-  filterListElement.removeEventListener('change', onFilterItemChange);
-};
-
-export { initFilterPhotoActions, deInitFilterPhotoActions, resetPhotoStyles };
+export { initFiltersActions, createSlider, resetFilterStyles, resetPhotoStyles, resetSlider };
