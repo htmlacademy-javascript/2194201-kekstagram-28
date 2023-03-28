@@ -4,17 +4,21 @@ const errorTemplate = document.querySelector('#error').content.querySelector('.e
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 
 const removeErrorMessage = () => {
-  document.removeEventListener('keydown', onErrorMessageKeydown);
-  document.querySelector('.error').removeEventListener('click', onErrorMessageClick);
+  const errorMessage = document.querySelector('.error');
 
-  document.querySelector('.error').remove();
+  document.removeEventListener('keydown', onErrorMessageKeydown);
+  errorMessage.removeEventListener('click', onErrorMessageClick);
+
+  errorMessage.remove();
 };
 
 const removeSuccessMessage = () => {
-  document.removeEventListener('keydown', onSuccessMessageKeydown);
-  document.querySelector('.success').removeEventListener('click', onSuccessMessageClick);
+  const successMessage = document.querySelector('.success');
 
-  document.querySelector('.success').remove();
+  document.removeEventListener('keydown', onSuccessMessageKeydown);
+  successMessage.removeEventListener('click', onSuccessMessageClick);
+
+  successMessage.remove();
 };
 
 function onErrorMessageKeydown(evt) {
@@ -50,7 +54,7 @@ export const createErrorMessage = () => {
   renderElement(errorMessage);
 
   document.addEventListener('keydown', onErrorMessageKeydown);
-  document.querySelector('.error').addEventListener('click', onErrorMessageClick);
+  errorMessage.addEventListener('click', onErrorMessageClick);
 };
 
 export const createSuccessMessage = () => {
@@ -58,5 +62,5 @@ export const createSuccessMessage = () => {
   renderElement(successMessage);
 
   document.addEventListener('keydown', onSuccessMessageKeydown);
-  document.querySelector('.success').addEventListener('click', onSuccessMessageClick);
+  successMessage.addEventListener('click', onSuccessMessageClick);
 };
