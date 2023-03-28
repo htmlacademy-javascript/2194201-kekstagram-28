@@ -3,38 +3,38 @@ const MAX_ZOOM = 100;
 let typeEffect = '';
 let typeUnit = '';
 
-const FiltersSettings = {
-  chrome: {
-    min: 0,
-    max: 1,
-    step: 0.1,
-    css: 'grayscale',
+const FilterSettings = {
+  CHROME: {
+    MIN: 0,
+    MAX: 1,
+    STEP: 0.1,
+    CSS: 'grayscale',
   },
-  sepia: {
-    min: 0,
-    max: 1,
-    step: 0.1,
-    css: 'sepia',
+  SEPIA: {
+    MIN: 0,
+    MAX: 1,
+    STEP: 0.1,
+    CSS: 'sepia',
   },
-  marvin: {
-    min: 0,
-    max: 100,
-    step: 1,
-    css: 'invert',
-    unit: '%',
+  MARVIN: {
+    MIN: 0,
+    MAX: 100,
+    STEP: 1,
+    CSS: 'invert',
+    UNIT: '%',
   },
-  phobos: {
-    min: 0,
-    max: 3,
-    step: 0.1,
-    css: 'blur',
-    unit: 'px',
+  PHOBOS: {
+    MIN: 0,
+    MAX: 3,
+    STEP: 0.1,
+    CSS: 'blur',
+    UNIT: 'px',
   },
-  heat: {
-    min: 1,
-    max: 3,
-    step: 0.1,
-    css: 'brightness',
+  HEAT: {
+    MIN: 1,
+    MAX: 3,
+    STEP: 0.1,
+    CSS: 'brightness',
   },
 };
 
@@ -94,11 +94,11 @@ const updateOptionsSlider = (min = 0, max = 100, step = 1) => {
 };
 
 const updateFilter = (filter) => {
-  typeEffect = FiltersSettings?.[filter]?.css ?? '';
-  typeUnit = FiltersSettings?.[filter]?.unit ?? '';
+  typeEffect = FilterSettings?.[filter]?.CSS ?? '';
+  typeUnit = FilterSettings?.[filter]?.UNIT ?? '';
   photoElement.className = '';
 
-  if (filter !== 'none') {
+  if (filter.toLowerCase() !== 'none') {
     sliderElement.classList.remove('hidden');
     photoElement.classList.add(`effects__preview--${filter}`);
   } else {
@@ -127,9 +127,9 @@ function onZoomInButtonClick(evt) {
 
 function onFilterItemChange(evt) {
   if (evt.target.closest('.effects__radio')) {
-    const filter = evt.target.value;
+    const filter = evt.target.value.toUpperCase();
     updateFilter(filter);
-    updateOptionsSlider(FiltersSettings?.[filter]?.min, FiltersSettings?.[filter]?.max, FiltersSettings?.[filter]?.step);
+    updateOptionsSlider(FilterSettings?.[filter]?.MIN, FilterSettings?.[filter]?.MAX, FilterSettings?.[filter]?.STEP);
   }
 }
 
