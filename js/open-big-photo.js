@@ -7,6 +7,10 @@ let commentsTemp;
 
 const bigPhotoElement = document.querySelector('.big-picture');
 const bigPhotoCloseButton = document.querySelector('.big-picture__cancel');
+const photoElement = document.querySelector('.big-picture__img>img');
+const descriptionElement = document.querySelector('.social__caption');
+const likesElement = document.querySelector('.likes-count');
+const commentsCountElement = document.querySelector('.comments-count');
 const loadCommentsButton = document.querySelector('.social__comments-loader');
 const commentsListElement = document.querySelector('.social__comments');
 const commentsCurrentElement = document.querySelector('.comments-current');
@@ -48,10 +52,10 @@ const renderComments = (comments) => {
 };
 
 const fillPhotoData = (photo) => {
-  bigPhotoElement.querySelector('.big-picture__img>img').src = photo.url;
-  bigPhotoElement.querySelector('.social__caption').textContent = photo.description;
-  bigPhotoElement.querySelector('.likes-count').textContent = photo.likes;
-  bigPhotoElement.querySelector('.comments-count').textContent = photo.comments.length;
+  photoElement.src = photo.url;
+  descriptionElement.textContent = photo.description;
+  likesElement.textContent = photo.likes;
+  commentsCountElement.textContent = photo.comments.length;
 
   commentsListElement.innerHTML = '';
   renderComments(photo.comments);
