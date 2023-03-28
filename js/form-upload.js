@@ -38,7 +38,7 @@ const unblockSubmitButton = () => {
   submitButton.textContent = SubmitButtonText.DEFAULT;
 };
 
-const hiddenEditPhoto = () => {
+export const hiddenEditPhoto = () => {
   hiddenEditPhotoElement();
   deInitFilterPhotoActions();
   resetPhotoStyles();
@@ -61,17 +61,12 @@ function onDocumentKeydown(evt) {
   }
 }
 
-function onSuccess() {
-  createSuccessMessage();
-  hiddenEditPhoto();
-}
-
 function onEditPhotoFormSubmit(evt) {
   evt.preventDefault();
   if (validate()) {
     blockSubmitButton();
     sendData(new FormData(evt.target))
-      .then(onSuccess)
+      .then(createSuccessMessage)
       .catch(createErrorMessage)
       .finally(unblockSubmitButton);
   }

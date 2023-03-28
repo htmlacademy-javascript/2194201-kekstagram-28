@@ -1,4 +1,5 @@
 import { isEscapeKey, renderElement } from './utils.js';
+import { hiddenEditPhoto } from './form-upload.js';
 
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -63,4 +64,6 @@ export const createSuccessMessage = () => {
 
   document.addEventListener('keydown', onSuccessMessageKeydown);
   successMessage.addEventListener('click', onSuccessMessageClick);
+
+  hiddenEditPhoto();
 };
