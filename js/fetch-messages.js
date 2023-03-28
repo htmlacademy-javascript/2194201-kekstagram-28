@@ -4,6 +4,24 @@ import { hiddenEditPhoto } from './form-upload.js';
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 
+const createErrorMessage = () => {
+  const errorMessage = errorTemplate.cloneNode(true);
+  renderElement(errorMessage);
+
+  document.addEventListener('keydown', onErrorMessageKeydown);
+  errorMessage.addEventListener('click', onErrorMessageClick);
+};
+
+const createSuccessMessage = () => {
+  const successMessage = successTemplate.cloneNode(true);
+  renderElement(successMessage);
+
+  document.addEventListener('keydown', onSuccessMessageKeydown);
+  successMessage.addEventListener('click', onSuccessMessageClick);
+
+  hiddenEditPhoto();
+};
+
 const removeErrorMessage = () => {
   const errorMessage = document.querySelector('.error');
 
@@ -50,20 +68,4 @@ function onSuccessMessageClick(evt) {
   }
 }
 
-export const createErrorMessage = () => {
-  const errorMessage = errorTemplate.cloneNode(true);
-  renderElement(errorMessage);
-
-  document.addEventListener('keydown', onErrorMessageKeydown);
-  errorMessage.addEventListener('click', onErrorMessageClick);
-};
-
-export const createSuccessMessage = () => {
-  const successMessage = successTemplate.cloneNode(true);
-  renderElement(successMessage);
-
-  document.addEventListener('keydown', onSuccessMessageKeydown);
-  successMessage.addEventListener('click', onSuccessMessageClick);
-
-  hiddenEditPhoto();
-};
+export { createErrorMessage, createSuccessMessage };

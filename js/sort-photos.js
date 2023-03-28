@@ -51,7 +51,7 @@ function onSortButtonClick(sortType, callback) {
   callback();
 }
 
-export const initSortPhotosActions = (photos) => {
+const initSortPhotosActions = (photos) => {
   sortPhotosElement.classList.remove('img-filters--inactive');
 
   sortButtons.forEach((button) => {
@@ -64,3 +64,5 @@ export const initSortPhotosActions = (photos) => {
     });
   });
 };
+
+export { initSortPhotosActions };

@@ -13,7 +13,7 @@ const removeErrorElementTimeout = debounce(() => removeErrorElement(), FILE_TYPE
 
 const checkFileTypes = (fileName) => FILE_TYPES.some((type) => fileName.endsWith(type));
 
-export const insertPhotoInImageElement = () => {
+const insertPhotoInImageElement = () => {
   const file = uploadPhotoInput.files[0];
   const fileName = file.name.toLowerCase();
 
@@ -29,3 +29,5 @@ export const insertPhotoInImageElement = () => {
     uploadPhotoInput.value = '';
   }
 };
+
+export { insertPhotoInImageElement };

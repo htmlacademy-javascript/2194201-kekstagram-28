@@ -16,6 +16,7 @@ const commentsListElement = document.querySelector('.social__comments');
 const commentsCurrentElement = document.querySelector('.comments-current');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 
+
 const fillCommentData = (comment) => {
   const commentClone = commentTemplate.cloneNode(true);
   commentClone.querySelector('.social__picture').src = comment.avatar;
@@ -50,6 +51,28 @@ const renderComments = (comments) => {
   }
 };
 
+const fillPhotoData = (photo) => {
+  imageElement.src = photo.url;
+  descriptionElement.textContent = photo.description;
+  likesElement.textContent = photo.likes;
+  commentsCountElement.textContent = photo.comments.length;
+
+  commentsListElement.innerHTML = '';
+  renderComments(photo.comments);
+};
+
+const showBigPhotoElement = () => {
+  countComments = 0;
+  commentsTemp = '';
+
+  bigPhotoElement.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+
+  loadCommentsButton.addEventListener('click', onLoadCommentsButtonClick);
+  bigPhotoCloseButton.addEventListener('click', onBigPhotoCloseButtonClick);
+  document.addEventListener('keydown', onDocumentKeydown);
+};
+
 const hiddenBigPhotoElement = () => {
   bigPhotoElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -77,24 +100,4 @@ function onDocumentKeydown(evt) {
   }
 }
 
-export const showBigPhotoElement = () => {
-  countComments = 0;
-  commentsTemp = '';
-
-  bigPhotoElement.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-
-  loadCommentsButton.addEventListener('click', onLoadCommentsButtonClick);
-  bigPhotoCloseButton.addEventListener('click', onBigPhotoCloseButtonClick);
-  document.addEventListener('keydown', onDocumentKeydown);
-};
-
-export const fillPhotoData = (photo) => {
-  imageElement.src = photo.url;
-  descriptionElement.textContent = photo.description;
-  likesElement.textContent = photo.likes;
-  commentsCountElement.textContent = photo.comments.length;
-
-  commentsListElement.innerHTML = '';
-  renderComments(photo.comments);
-};
+export { showBigPhotoElement, fillPhotoData };

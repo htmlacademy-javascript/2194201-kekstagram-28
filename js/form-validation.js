@@ -27,4 +27,6 @@ const validateHashTags = () => {
 
 pristine.addValidator(hashTagInput, validateHashTags, MESSAGE_ERROR_HASH_TAG);
 
-export const validate = () => pristine.validate();
+const validate = () => pristine.validate();
+
+export { validate };

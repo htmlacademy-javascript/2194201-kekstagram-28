@@ -18,6 +18,14 @@ const hashTagInput = document.querySelector('.text__hashtags');
 const descriptionInput = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
 
+const showEditPhotoElement = () => {
+  editPhotoElement.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+
+  editPhotoCloseButton.addEventListener('click', onEditPhotoCloseButtonClick);
+  document.addEventListener('keydown', onDocumentKeydown);
+};
+
 const hiddenEditPhotoElement = () => {
   uploadPhotoInput.value = '';
 
@@ -38,7 +46,7 @@ const unblockSubmitButton = () => {
   submitButton.textContent = SubmitButtonText.DEFAULT;
 };
 
-export const hiddenEditPhoto = () => {
+const hiddenEditPhoto = () => {
   hiddenEditPhotoElement();
   deInitFilterPhotoActions();
   resetPhotoStyles();
@@ -72,15 +80,9 @@ function onEditPhotoFormSubmit(evt) {
   }
 }
 
-export const showEditPhotoElement = () => {
-  editPhotoElement.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-
-  editPhotoCloseButton.addEventListener('click', onEditPhotoCloseButtonClick);
-  document.addEventListener('keydown', onDocumentKeydown);
-};
-
-export const initUploadPhotoActions = () => {
+const initUploadPhotoActions = () => {
   uploadPhotoInput.addEventListener('change', onUploadPhotoChange);
   editPhotoForm.addEventListener('submit', onEditPhotoFormSubmit);
 };
+
+export { initUploadPhotoActions, showEditPhotoElement, hiddenEditPhoto };

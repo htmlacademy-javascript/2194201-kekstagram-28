@@ -3,6 +3,11 @@ import { showBigPhotoElement, fillPhotoData } from './show-big-photo.js';
 const imageElement = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
+function onPhotoClick(photo) {
+  showBigPhotoElement();
+  fillPhotoData(photo);
+}
+
 const createPhoto = (photo) => {
   const photoClone = photoTemplate.cloneNode(true);
   photoClone.querySelector('.picture__img').src = photo.url;
@@ -18,10 +23,6 @@ const createPhoto = (photo) => {
   return photoClone;
 };
 
-function onPhotoClick(photo) {
-  showBigPhotoElement();
-  fillPhotoData(photo);
-}
+const renderPhotos = (photos) => photos.forEach((photo) => imageElement.append(createPhoto(photo)));
 
-export const renderPhotos = (photos) => photos.forEach((photo) => imageElement.append(createPhoto(photo)));
-
+export { renderPhotos };
