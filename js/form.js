@@ -1,11 +1,10 @@
 import { isEscapeKey } from './utils.js';
 import { addValidator, validatePristine, resetPristine } from './form-validation.js';
-import { initFiltersActions, createSlider, resetPhotoStyles, resetSlider } from './filters.js';
+import { initFiltersActions, createSlider, resetPhotoStyles, resetFilter } from './filters.js';
 import { sendData } from './api.js';
 import { createErrorMessage, createSuccessMessage } from './messages.js';
 import { insertPhotoInImageElement } from './check-file-types.js';
 import { activateScale } from './form-scale.js';
-import { resetFilterStyles } from './filters.js';
 
 const editPhotoElement = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
@@ -24,10 +23,9 @@ const showEditPhotoElement = () => {
 
 const hiddenEditPhotoElement = () => {
   editPhotoForm.reset();
-  resetFilterStyles();
+  resetFilter();
   resetPhotoStyles();
   resetPristine();
-  resetSlider();
 
   editPhotoElement.classList.add('hidden');
   document.body.classList.remove('modal-open');

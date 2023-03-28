@@ -1,38 +1,38 @@
 let typeEffect = '';
 let typeUnit = '';
 
-const FilterSettings = {
-  CHROME: {
-    MIN: 0,
-    MAX: 1,
-    STEP: 0.1,
-    CSS: 'grayscale',
+const FILTER_SETTINGS = {
+  chrome: {
+    min: 0,
+    max: 1,
+    step: 0.1,
+    css: 'grayscale',
   },
-  SEPIA: {
-    MIN: 0,
-    MAX: 1,
-    STEP: 0.1,
-    CSS: 'sepia',
+  sepia: {
+    min: 0,
+    max: 1,
+    step: 0.1,
+    css: 'sepia',
   },
-  MARVIN: {
-    MIN: 0,
-    MAX: 100,
-    STEP: 1,
-    CSS: 'invert',
-    UNIT: '%',
+  marvin: {
+    min: 0,
+    max: 100,
+    step: 1,
+    css: 'invert',
+    unit: '%',
   },
-  PHOBOS: {
-    MIN: 0,
-    MAX: 3,
-    STEP: 0.1,
-    CSS: 'blur',
-    UNIT: 'px',
+  phobos: {
+    min: 0,
+    max: 3,
+    step: 0.1,
+    css: 'blur',
+    unit: 'px',
   },
-  HEAT: {
-    MIN: 1,
-    MAX: 3,
-    STEP: 0.1,
-    CSS: 'brightness',
+  heat: {
+    min: 1,
+    max: 3,
+    step: 0.1,
+    css: 'brightness',
   },
 };
 
@@ -77,11 +77,11 @@ const updateOptionsSlider = (min = 0, max = 100, step = 1) => {
 };
 
 const updateFilter = (filter) => {
-  typeEffect = FilterSettings?.[filter]?.CSS ?? '';
-  typeUnit = FilterSettings?.[filter]?.UNIT ?? '';
+  typeEffect = FILTER_SETTINGS?.[filter]?.css ?? '';
+  typeUnit = FILTER_SETTINGS?.[filter]?.unit ?? '';
   imageElement.className = '';
 
-  if (filter.toLowerCase() !== 'none') {
+  if (filter !== 'none') {
     sliderElement.classList.remove('hidden');
     imageElement.classList.add(`effects__preview--${filter}`);
   } else {
@@ -90,9 +90,10 @@ const updateFilter = (filter) => {
   }
 };
 
-const resetFilterStyles = () => {
+const resetFilter = () => {
   typeEffect = '';
   typeUnit = '';
+  sliderElement.classList.add('hidden');
 };
 
 const resetPhotoStyles = () => {
@@ -100,13 +101,11 @@ const resetPhotoStyles = () => {
   imageElement.style = null;
 };
 
-const resetSlider = () => sliderElement.classList.add('hidden');
-
 const onFilterItemChange = (evt) => {
   if (evt.target.closest('.effects__radio')) {
-    const filter = evt.target.value.toUpperCase();
+    const filter = evt.target.value;
     updateFilter(filter);
-    updateOptionsSlider(FilterSettings?.[filter]?.MIN, FilterSettings?.[filter]?.MAX, FilterSettings?.[filter]?.STEP);
+    updateOptionsSlider(FILTER_SETTINGS?.[filter]?.min, FILTER_SETTINGS?.[filter]?.max, FILTER_SETTINGS?.[filter]?.step);
   }
 };
 
@@ -121,4 +120,4 @@ const initFiltersActions = () => {
   levelSliderElement.noUiSlider.on('update', onLevelSliderUpdate);
 };
 
-export { initFiltersActions, createSlider, resetFilterStyles, resetPhotoStyles, resetSlider };
+export { initFiltersActions, createSlider, resetFilter, resetPhotoStyles };
