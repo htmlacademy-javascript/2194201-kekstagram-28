@@ -1,14 +1,3 @@
-const zoomOutButton = document.querySelector('.scale__control--smaller');
-const zoomInButton = document.querySelector('.scale__control--bigger');
-const zoomInput = document.querySelector('.scale__control--value');
-const photoElement = document.querySelector('.img-upload__preview>img');
-const filterList = document.querySelector('.img-upload__effects');
-const sliderContainer = document.querySelector('.img-upload__effect-level');
-const levelSlider = document.querySelector('.effect-level__slider');
-const levelFilter = document.querySelector('.effect-level__value');
-const hashTagField = document.querySelector('.text__hashtags');
-const descriptionField = document.querySelector('.text__description');
-
 const MIN_ZOOM = 25;
 const MAX_ZOOM = 100;
 let typeEffect = '';
@@ -48,6 +37,17 @@ const FiltersSettings = {
     css: 'brightness',
   },
 };
+
+const zoomOutButton = document.querySelector('.scale__control--smaller');
+const zoomInButton = document.querySelector('.scale__control--bigger');
+const zoomInput = document.querySelector('.scale__control--value');
+const photoElement = document.querySelector('.img-upload__preview>img');
+const filterList = document.querySelector('.img-upload__effects');
+const sliderContainer = document.querySelector('.img-upload__effect-level');
+const levelSlider = document.querySelector('.effect-level__slider');
+const levelFilter = document.querySelector('.effect-level__value');
+const hashTagField = document.querySelector('.text__hashtags');
+const descriptionField = document.querySelector('.text__description');
 
 noUiSlider.create(levelSlider, {
   range: {

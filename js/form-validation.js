@@ -1,9 +1,9 @@
-const editPhotoForm = document.querySelector('.img-upload__form');
-const hashTagField = document.querySelector('.text__hashtags');
-
 const REG_EXP = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASH_TAGS = 5;
 const MESSAGE_ERROR_HASHTAG = `Не более ${MAX_HASH_TAGS} уникальных хэштэгов < 20 символов каждый. Сначала #, а после - буквы и цифры!`;
+
+const editPhotoForm = document.querySelector('.img-upload__form');
+const hashTagField = document.querySelector('.text__hashtags');
 
 const pristine = new Pristine(editPhotoForm, {
   classTo: 'img-upload__field-wrapper',

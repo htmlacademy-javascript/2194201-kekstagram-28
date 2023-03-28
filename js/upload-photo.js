@@ -5,6 +5,11 @@ import { sendData } from './api.js';
 import { createErrorMessage, createSuccessMessage } from './fetch-messages.js';
 import { insertPhotoInContainer } from './check-file-types.js';
 
+const SubmitButtonText = {
+  DEFAULT: 'Опубликовать',
+  SENDING: 'Загружаю...'
+};
+
 const editPhotoContainer = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
 const editPhotoContainerCloseButton = document.querySelector('.img-upload__cancel');
@@ -12,11 +17,6 @@ const editPhotoForm = document.querySelector('.img-upload__form');
 const hashTagField = document.querySelector('.text__hashtags');
 const descriptionField = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
-
-const SubmitButtonText = {
-  DEFAULT: 'Опубликовать',
-  SENDING: 'Загружаю...'
-};
 
 const closeEditPhotoContainer = () => {
   uploadPhotoInput.value = '';
