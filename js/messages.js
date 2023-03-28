@@ -1,5 +1,5 @@
 import { isEscapeKey, renderElement } from './utils.js';
-import { hiddenEditPhoto } from './form-upload.js';
+import { hiddenEditPhoto } from './form.js';
 
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');

@@ -1,8 +1,8 @@
 import { isEscapeKey } from './utils.js';
-import { validate } from './form-validation.js';
-import { deInitFilterPhotoActions, resetPhotoStyles } from './filters-photo.js';
+import { validate } from './validation.js';
+import { deInitFilterPhotoActions, resetPhotoStyles } from './filters.js';
 import { sendData } from './api.js';
-import { createErrorMessage, createSuccessMessage } from './fetch-messages.js';
+import { createErrorMessage, createSuccessMessage } from './messages.js';
 import { insertPhotoInImageElement } from './check-file-types.js';
 
 const SubmitButtonText = {

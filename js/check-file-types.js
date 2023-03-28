@@ -1,6 +1,6 @@
 import { createErrorElement, removeErrorElement, debounce } from './utils.js';
-import { showEditPhotoElement } from './form-upload.js';
-import { initFilterPhotoActions } from './filters-photo.js';
+import { showEditPhotoElement } from './form.js';
+import { initFilterPhotoActions } from './filters.js';
 
 const FILE_TYPES = ['gif', 'png', 'jpeg', 'jpg'];
 const FILE_TYPES_ERROR_MESSAGE = 'Допустимы только файлы изображений: gif, png, jpeg, jpg';
