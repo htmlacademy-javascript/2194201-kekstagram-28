@@ -3,7 +3,7 @@ import { validate } from './form-validation.js';
 import { deInitFilterPhotoActions, resetPhotoStyles } from './filters-photo.js';
 import { sendData } from './api.js';
 import { createErrorMessage, createSuccessMessage } from './fetch-messages.js';
-import { insertPhotoInContainer } from './check-file-types.js';
+import { insertPhotoInImageElement } from './check-file-types.js';
 
 const SubmitButtonText = {
   DEFAULT: 'Опубликовать',
@@ -18,7 +18,7 @@ const hashTagInput = document.querySelector('.text__hashtags');
 const descriptionInput = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
 
-const closeEditPhotoContainer = () => {
+const hiddenEditPhotoElement = () => {
   uploadPhotoInput.value = '';
 
   editPhotoElement.classList.add('hidden');
@@ -40,20 +40,20 @@ const unblockSubmitButton = () => {
 
 function onEditPhotoCloseButtonClick(evt) {
   evt.preventDefault();
-  closeEditPhotoContainer();
+  hiddenEditPhotoElement();
   deInitFilterPhotoActions();
   resetPhotoStyles();
 }
 
 function onUploadPhotoChange(evt) {
   evt.preventDefault();
-  insertPhotoInContainer();
+  insertPhotoInImageElement();
 }
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt) && !hashTagInput.matches(':focus') && !descriptionInput.matches(':focus') && !document.querySelector('.error')) {
     evt.preventDefault();
-    closeEditPhotoContainer();
+    hiddenEditPhotoElement();
     deInitFilterPhotoActions();
     resetPhotoStyles();
   }
@@ -64,7 +64,7 @@ function onError() {
 }
 
 function onSuccess() {
-  closeEditPhotoContainer();
+  hiddenEditPhotoElement();
   resetPhotoStyles();
   createSuccessMessage();
 }
@@ -82,7 +82,7 @@ function onEditPhotoFormSubmit(evt) {
 
 editPhotoForm.addEventListener('submit', onEditPhotoFormSubmit);
 
-export const openEditPhotoContainer = () => {
+export const showEditPhotoElement = () => {
   editPhotoElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 

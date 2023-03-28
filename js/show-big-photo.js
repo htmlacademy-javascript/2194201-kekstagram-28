@@ -61,7 +61,7 @@ const fillPhotoData = (photo) => {
   renderComments(photo.comments);
 };
 
-const closeBigPhoto = () => {
+const hiddenBigPhotoElement = () => {
   bigPhotoElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   loadCommentsButton.classList.remove('hidden');
@@ -71,7 +71,7 @@ const closeBigPhoto = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
-const openBigPhoto = () => {
+const showBigPhotoElement = () => {
   countComments = 0;
   commentsTemp = '';
 
@@ -90,17 +90,17 @@ function onLoadCommentsButtonClick(evt) {
 
 function onBigPhotoCloseButtonClick(evt) {
   evt.preventDefault();
-  closeBigPhoto();
+  hiddenBigPhotoElement();
 }
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeBigPhoto();
+    hiddenBigPhotoElement();
   }
 }
 
 export const onPhotoClick = (photo) => {
-  openBigPhoto();
+  showBigPhotoElement();
   fillPhotoData(photo);
 };

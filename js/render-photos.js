@@ -1,4 +1,4 @@
-import { onPhotoClick } from './open-big-photo.js';
+import { onPhotoClick } from './show-big-photo.js';
 
 const imageElement = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');

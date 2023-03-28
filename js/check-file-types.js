@@ -1,5 +1,5 @@
 import { createErrorElement, removeErrorElement, debounce } from './utils.js';
-import { openEditPhotoContainer } from './upload-photo.js';
+import { showEditPhotoElement } from './upload-photo.js';
 import { initFilterPhotoActions } from './filters-photo.js';
 
 const FILE_TYPES = ['gif', 'png', 'jpeg', 'jpg'];
@@ -13,12 +13,12 @@ const removeErrorElementTimeout = debounce(() => removeErrorElement(), FILE_TYPE
 
 const checkFileTypes = (fileName) => FILE_TYPES.some((item) => fileName.endsWith(item));
 
-export const insertPhotoInContainer = () => {
+export const insertPhotoInImageElement = () => {
   const file = uploadPhotoInput.files[0];
   const fileName = file.name.toLowerCase();
 
   if (checkFileTypes(fileName)) {
-    openEditPhotoContainer();
+    showEditPhotoElement();
     initFilterPhotoActions();
 
     imageElement.src = URL.createObjectURL(file);
