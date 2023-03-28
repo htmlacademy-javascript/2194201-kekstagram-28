@@ -3,6 +3,7 @@ import { debounce } from './utils.js';
 
 const MAX_RANDOM_PHOTOS = 10;
 const RERENDER_DELAY = 500;
+
 const sortPhotosSection = document.querySelector('.img-filters');
 const sortButtons = document.querySelectorAll('.img-filters__button');
 

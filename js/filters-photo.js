@@ -14,7 +14,7 @@ const MAX_ZOOM = 100;
 let typeEffect = '';
 let typeUnit = '';
 
-const filtersSettings = {
+const FiltersSettings = {
   chrome: {
     min: 0,
     max: 1,
@@ -94,8 +94,8 @@ const updateOptionsSlider = (min = 0, max = 100, step = 1) => {
 };
 
 const updateFilter = (filter) => {
-  typeEffect = filtersSettings?.[filter]?.css ?? '';
-  typeUnit = filtersSettings?.[filter]?.unit ?? '';
+  typeEffect = FiltersSettings?.[filter]?.css ?? '';
+  typeUnit = FiltersSettings?.[filter]?.unit ?? '';
   photoElement.className = '';
 
   if (filter !== 'none') {
@@ -129,7 +129,7 @@ function onFilterItemChange(evt) {
   if (evt.target.closest('.effects__radio')) {
     const filter = evt.target.value;
     updateFilter(filter);
-    updateOptionsSlider(filtersSettings?.[filter]?.min, filtersSettings?.[filter]?.max, filtersSettings?.[filter]?.step);
+    updateOptionsSlider(FiltersSettings?.[filter]?.min, FiltersSettings?.[filter]?.max, FiltersSettings?.[filter]?.step);
   }
 }
 
