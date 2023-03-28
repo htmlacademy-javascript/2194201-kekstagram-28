@@ -1,6 +1,6 @@
 import { onPhotoClick } from './open-big-photo.js';
 
-const photoContainer = document.querySelector('.pictures');
+const photoElement = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 const createPhoto = (photo) => {
@@ -19,6 +19,6 @@ const createPhoto = (photo) => {
 };
 
 export const renderPhotos = (photos) => {
-  photos.forEach((photo) => photoContainer.append(createPhoto(photo)));
+  photos.forEach((photo) => photoElement.append(createPhoto(photo)));
 };
 

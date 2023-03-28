@@ -42,14 +42,14 @@ const zoomOutButton = document.querySelector('.scale__control--smaller');
 const zoomInButton = document.querySelector('.scale__control--bigger');
 const zoomInput = document.querySelector('.scale__control--value');
 const photoElement = document.querySelector('.img-upload__preview>img');
-const filterList = document.querySelector('.img-upload__effects');
-const sliderContainer = document.querySelector('.img-upload__effect-level');
-const levelSlider = document.querySelector('.effect-level__slider');
-const levelFilter = document.querySelector('.effect-level__value');
-const hashTagField = document.querySelector('.text__hashtags');
-const descriptionField = document.querySelector('.text__description');
+const filterListElement = document.querySelector('.img-upload__effects');
+const sliderElement = document.querySelector('.img-upload__effect-level');
+const levelSliderElement = document.querySelector('.effect-level__slider');
+const levelFilterElement = document.querySelector('.effect-level__value');
+const hashTagInput = document.querySelector('.text__hashtags');
+const descriptionInput = document.querySelector('.text__description');
 
-noUiSlider.create(levelSlider, {
+noUiSlider.create(levelSliderElement, {
   range: {
     min: 0,
     max: 100,
@@ -83,7 +83,7 @@ const zoomInValue = () => {
 };
 
 const updateOptionsSlider = (min = 0, max = 100, step = 1) => {
-  levelSlider.noUiSlider.updateOptions({
+  levelSliderElement.noUiSlider.updateOptions({
     range: {
       min: min,
       max: max,
@@ -99,10 +99,10 @@ const updateFilter = (filter) => {
   photoElement.className = '';
 
   if (filter !== 'none') {
-    sliderContainer.classList.remove('hidden');
+    sliderElement.classList.remove('hidden');
     photoElement.classList.add(`effects__preview--${filter}`);
   } else {
-    sliderContainer.classList.add('hidden');
+    sliderElement.classList.add('hidden');
     photoElement.style.filter = null;
   }
 };
@@ -134,21 +134,21 @@ function onFilterItemChange(evt) {
 }
 
 function onLevelSliderUpdate() {
-  const valueCurrent = levelSlider.noUiSlider.get();
-  levelFilter.value = valueCurrent;
+  const valueCurrent = levelSliderElement.noUiSlider.get();
+  levelFilterElement.value = valueCurrent;
   photoElement.style.filter = `${typeEffect}(${valueCurrent + typeUnit})`;
 }
 
-levelSlider.noUiSlider.on('update', onLevelSliderUpdate);
+levelSliderElement.noUiSlider.on('update', onLevelSliderUpdate);
 
 export const resetPhotoStyles = () => {
   zoomInput.value = '100%';
   photoElement.className = '';
   photoElement.style = null;
-  sliderContainer.classList.add('hidden');
-  filterList.querySelector('#effect-none').checked = true;
-  hashTagField.value = '';
-  descriptionField.value = '';
+  sliderElement.classList.add('hidden');
+  filterListElement.querySelector('#effect-none').checked = true;
+  hashTagInput.value = '';
+  descriptionInput.value = '';
   typeEffect = '';
   typeUnit = '';
 };
@@ -156,11 +156,11 @@ export const resetPhotoStyles = () => {
 export const initFilterPhotoActions = () => {
   zoomOutButton.addEventListener('click', onZoomOutButtonClick);
   zoomInButton.addEventListener('click', onZoomInButtonClick);
-  filterList.addEventListener('change', onFilterItemChange);
+  filterListElement.addEventListener('change', onFilterItemChange);
 };
 
 export const deInitFilterPhotoActions = () => {
   zoomOutButton.removeEventListener('click', onZoomOutButtonClick);
   zoomInButton.removeEventListener('click', onZoomInButtonClick);
-  filterList.removeEventListener('change', onFilterItemChange);
+  filterListElement.removeEventListener('change', onFilterItemChange);
 };

@@ -4,12 +4,12 @@ import { debounce } from './utils.js';
 const MAX_RANDOM_PHOTOS = 10;
 const RERENDER_DELAY = 500;
 
-const sortPhotosSection = document.querySelector('.img-filters');
+const sortPhotosElement = document.querySelector('.img-filters');
 const sortButtons = document.querySelectorAll('.img-filters__button');
 
 const removePhotos = () => {
-  const photosElements = document.querySelectorAll('.picture');
-  photosElements.forEach((element) => element.remove());
+  const photoElements = document.querySelectorAll('.picture');
+  photoElements.forEach((element) => element.remove());
 };
 
 const sortRandom = (photos) => photos
@@ -52,7 +52,7 @@ function onSortButtonClick(sortType, callback) {
 }
 
 export const initSortPhotosActions = (photos) => {
-  sortPhotosSection.classList.remove('img-filters--inactive');
+  sortPhotosElement.classList.remove('img-filters--inactive');
 
   sortButtons.forEach((button) => {
     const sortType = button.getAttribute('id');

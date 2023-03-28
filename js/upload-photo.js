@@ -10,21 +10,21 @@ const SubmitButtonText = {
   SENDING: 'Загружаю...'
 };
 
-const editPhotoContainer = document.querySelector('.img-upload__overlay');
+const editPhotoElement = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
-const editPhotoContainerCloseButton = document.querySelector('.img-upload__cancel');
+const editPhotoCloseButton = document.querySelector('.img-upload__cancel');
 const editPhotoForm = document.querySelector('.img-upload__form');
-const hashTagField = document.querySelector('.text__hashtags');
-const descriptionField = document.querySelector('.text__description');
+const hashTagInput = document.querySelector('.text__hashtags');
+const descriptionInput = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
 
 const closeEditPhotoContainer = () => {
   uploadPhotoInput.value = '';
 
-  editPhotoContainer.classList.add('hidden');
+  editPhotoElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
-  editPhotoContainerCloseButton.removeEventListener('click', onEditPhotoCloseButtonClick);
+  editPhotoCloseButton.removeEventListener('click', onEditPhotoCloseButtonClick);
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
@@ -51,7 +51,7 @@ function onUploadPhotoChange(evt) {
 }
 
 function onDocumentKeydown(evt) {
-  if (isEscapeKey(evt) && !hashTagField.matches(':focus') && !descriptionField.matches(':focus') && !document.querySelector('.error')) {
+  if (isEscapeKey(evt) && !hashTagInput.matches(':focus') && !descriptionInput.matches(':focus') && !document.querySelector('.error')) {
     evt.preventDefault();
     closeEditPhotoContainer();
     deInitFilterPhotoActions();
@@ -83,10 +83,10 @@ function onEditPhotoFormSubmit(evt) {
 editPhotoForm.addEventListener('submit', onEditPhotoFormSubmit);
 
 export const openEditPhotoContainer = () => {
-  editPhotoContainer.classList.remove('hidden');
+  editPhotoElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
-  editPhotoContainerCloseButton.addEventListener('click', onEditPhotoCloseButtonClick);
+  editPhotoCloseButton.addEventListener('click', onEditPhotoCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
