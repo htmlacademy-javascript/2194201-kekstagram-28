@@ -1,6 +1,6 @@
 const REG_EXP = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASH_TAGS = 5;
-const MESSAGE_ERROR_HASHTAG = `Не более ${MAX_HASH_TAGS} уникальных хэштэгов < 20 символов каждый. Сначала #, а после - буквы и цифры!`;
+const MESSAGE_ERROR_HASH_TAG = `Не более ${MAX_HASH_TAGS} уникальных хэштэгов < 20 символов каждый. Сначала #, а после - буквы и цифры!`;
 
 const editPhotoForm = document.querySelector('.img-upload__form');
 const hashTagInput = document.querySelector('.text__hashtags');
@@ -25,6 +25,6 @@ const validateHashTags = () => {
   return !hashTagInput.value.length ? isValid : !isValid;
 };
 
-pristine.addValidator(hashTagInput, validateHashTags, MESSAGE_ERROR_HASHTAG);
+pristine.addValidator(hashTagInput, validateHashTags, MESSAGE_ERROR_HASH_TAG);
 
 export const validate = () => pristine.validate();
