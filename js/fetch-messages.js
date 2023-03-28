@@ -1,4 +1,4 @@
-import { isEscapeKey, renderMessage } from './utils.js';
+import { isEscapeKey, renderElement } from './utils.js';
 
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -47,7 +47,7 @@ function onSuccessMessageClick(evt) {
 
 export const createErrorMessage = () => {
   const errorMessage = errorTemplate.cloneNode(true);
-  renderMessage(errorMessage);
+  renderElement(errorMessage);
 
   document.addEventListener('keydown', onErrorMessageKeydown);
   document.querySelector('.error').addEventListener('click', onErrorMessageClick);
@@ -55,7 +55,7 @@ export const createErrorMessage = () => {
 
 export const createSuccessMessage = () => {
   const successMessage = successTemplate.cloneNode(true);
-  renderMessage(successMessage);
+  renderElement(successMessage);
 
   document.addEventListener('keydown', onSuccessMessageKeydown);
   document.querySelector('.success').addEventListener('click', onSuccessMessageClick);
