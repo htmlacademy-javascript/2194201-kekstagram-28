@@ -11,7 +11,7 @@ const imageElement = document.querySelector('.img-upload__preview>img');
 
 const removeErrorElementTimeout = debounce(() => removeErrorElement(), FILE_TYPES_ERROR_TIMER);
 
-const checkFileTypes = (fileName) => FILE_TYPES.some((item) => fileName.endsWith(item));
+const checkFileTypes = (fileName) => FILE_TYPES.some((type) => fileName.endsWith(type));
 
 export const insertPhotoInImageElement = () => {
   const file = uploadPhotoInput.files[0];
