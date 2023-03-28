@@ -48,7 +48,7 @@ const renderComments = (comments) => {
 };
 
 const fillPhotoData = (photo) => {
-  bigPhotoElement.querySelector('img').src = photo.url;
+  bigPhotoElement.querySelector('.big-picture__img>img').src = photo.url;
   bigPhotoElement.querySelector('.social__caption').textContent = photo.description;
   bigPhotoElement.querySelector('.likes-count').textContent = photo.likes;
   bigPhotoElement.querySelector('.comments-count').textContent = photo.comments.length;
