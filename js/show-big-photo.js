@@ -31,7 +31,6 @@ const fillCommentsCurrent = (counter) => {
 const removeLoadCommentsButton = () => loadCommentsButton.classList.add('hidden');
 
 const renderComments = (comments) => {
-
   if (!commentsTemp) {
     commentsLength = comments.length;
     commentsTemp = [...comments];
@@ -51,16 +50,6 @@ const renderComments = (comments) => {
   }
 };
 
-const fillPhotoData = (photo) => {
-  imageElement.src = photo.url;
-  descriptionElement.textContent = photo.description;
-  likesElement.textContent = photo.likes;
-  commentsCountElement.textContent = photo.comments.length;
-
-  commentsListElement.innerHTML = '';
-  renderComments(photo.comments);
-};
-
 const hiddenBigPhotoElement = () => {
   bigPhotoElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -69,18 +58,6 @@ const hiddenBigPhotoElement = () => {
   loadCommentsButton.removeEventListener('click', onLoadCommentsButtonClick);
   bigPhotoCloseButton.removeEventListener('click', onBigPhotoCloseButtonClick);
   document.removeEventListener('keydown', onDocumentKeydown);
-};
-
-const showBigPhotoElement = () => {
-  countComments = 0;
-  commentsTemp = '';
-
-  bigPhotoElement.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-
-  loadCommentsButton.addEventListener('click', onLoadCommentsButtonClick);
-  bigPhotoCloseButton.addEventListener('click', onBigPhotoCloseButtonClick);
-  document.addEventListener('keydown', onDocumentKeydown);
 };
 
 function onLoadCommentsButtonClick(evt) {
@@ -100,7 +77,24 @@ function onDocumentKeydown(evt) {
   }
 }
 
-export const onPhotoClick = (photo) => {
-  showBigPhotoElement();
-  fillPhotoData(photo);
+export const showBigPhotoElement = () => {
+  countComments = 0;
+  commentsTemp = '';
+
+  bigPhotoElement.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+
+  loadCommentsButton.addEventListener('click', onLoadCommentsButtonClick);
+  bigPhotoCloseButton.addEventListener('click', onBigPhotoCloseButtonClick);
+  document.addEventListener('keydown', onDocumentKeydown);
+};
+
+export const fillPhotoData = (photo) => {
+  imageElement.src = photo.url;
+  descriptionElement.textContent = photo.description;
+  likesElement.textContent = photo.likes;
+  commentsCountElement.textContent = photo.comments.length;
+
+  commentsListElement.innerHTML = '';
+  renderComments(photo.comments);
 };

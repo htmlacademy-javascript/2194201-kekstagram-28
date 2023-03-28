@@ -1,4 +1,4 @@
-import { onPhotoClick } from './show-big-photo.js';
+import { showBigPhotoElement, fillPhotoData } from './show-big-photo.js';
 
 const imageElement = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -18,7 +18,10 @@ const createPhoto = (photo) => {
   return photoClone;
 };
 
-export const renderPhotos = (photos) => {
-  photos.forEach((photo) => imageElement.append(createPhoto(photo)));
-};
+function onPhotoClick(photo) {
+  showBigPhotoElement();
+  fillPhotoData(photo);
+}
+
+export const renderPhotos = (photos) => photos.forEach((photo) => imageElement.append(createPhoto(photo)));
 

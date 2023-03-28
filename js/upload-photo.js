@@ -38,11 +38,15 @@ const unblockSubmitButton = () => {
   submitButton.textContent = SubmitButtonText.DEFAULT;
 };
 
-function onEditPhotoCloseButtonClick(evt) {
-  evt.preventDefault();
+const hiddenEditPhoto = () => {
   hiddenEditPhotoElement();
   deInitFilterPhotoActions();
   resetPhotoStyles();
+};
+
+function onEditPhotoCloseButtonClick(evt) {
+  evt.preventDefault();
+  hiddenEditPhoto();
 }
 
 function onUploadPhotoChange(evt) {
@@ -53,9 +57,7 @@ function onUploadPhotoChange(evt) {
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt) && !hashTagInput.matches(':focus') && !descriptionInput.matches(':focus') && !document.querySelector('.error')) {
     evt.preventDefault();
-    hiddenEditPhotoElement();
-    deInitFilterPhotoActions();
-    resetPhotoStyles();
+    hiddenEditPhoto();
   }
 }
 
@@ -64,9 +66,8 @@ function onError() {
 }
 
 function onSuccess() {
-  hiddenEditPhotoElement();
-  resetPhotoStyles();
   createSuccessMessage();
+  hiddenEditPhoto();
 }
 
 function onEditPhotoFormSubmit(evt) {
@@ -80,8 +81,6 @@ function onEditPhotoFormSubmit(evt) {
   }
 }
 
-editPhotoForm.addEventListener('submit', onEditPhotoFormSubmit);
-
 export const showEditPhotoElement = () => {
   editPhotoElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -90,4 +89,7 @@ export const showEditPhotoElement = () => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-export const initUploadPhotoActions = () => uploadPhotoInput.addEventListener('change', onUploadPhotoChange);
+export const initUploadPhotoActions = () => {
+  uploadPhotoInput.addEventListener('change', onUploadPhotoChange);
+  editPhotoForm.addEventListener('submit', onEditPhotoFormSubmit);
+};
