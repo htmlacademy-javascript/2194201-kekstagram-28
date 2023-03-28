@@ -61,10 +61,6 @@ function onDocumentKeydown(evt) {
   }
 }
 
-function onError() {
-  createErrorMessage();
-}
-
 function onSuccess() {
   createSuccessMessage();
   hiddenEditPhoto();
@@ -76,7 +72,7 @@ function onEditPhotoFormSubmit(evt) {
     blockSubmitButton();
     sendData(new FormData(evt.target))
       .then(onSuccess)
-      .catch(onError)
+      .catch(createErrorMessage)
       .finally(unblockSubmitButton);
   }
 }
