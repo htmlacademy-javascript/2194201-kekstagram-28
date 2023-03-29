@@ -16,7 +16,6 @@ const commentsListElement = document.querySelector('.social__comments');
 const commentsCurrentElement = document.querySelector('.comments-current');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 
-
 const fillCommentData = (comment) => {
   const commentClone = commentTemplate.cloneNode(true);
   commentClone.querySelector('.social__picture').src = comment.avatar;
