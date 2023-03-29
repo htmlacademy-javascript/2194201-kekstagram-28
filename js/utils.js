@@ -11,7 +11,7 @@ const debounce = (callback, timeoutDelay) => {
 
 const renderMessage = (element) => document.body.append(element);
 
-const createErrorElement = (message) => {
+const createErrorMessage = (message) => {
   const div = document.createElement('div');
   div.classList.add('error-message');
   div.textContent = message;
@@ -23,4 +23,4 @@ const removeErrorElement = () => {
   errorMessage.remove();
 };
 
-export { isEscapeKey, debounce, renderMessage, createErrorElement, removeErrorElement };
+export { isEscapeKey, debounce, renderMessage, createErrorMessage, removeErrorElement };

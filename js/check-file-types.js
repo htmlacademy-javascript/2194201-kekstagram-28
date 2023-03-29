@@ -1,4 +1,4 @@
-import { createErrorElement, removeErrorElement, debounce } from './utils.js';
+import { createErrorMessage, removeErrorElement, debounce } from './utils.js';
 import { showEditPhotoElement } from './form.js';
 
 const FILE_TYPES = ['gif', 'png', 'jpeg', 'jpg'];
@@ -23,7 +23,7 @@ const checkFileTypes = () => {
     insertImage(file);
     showEditPhotoElement();
   } else {
-    createErrorElement(FILE_TYPES_ERROR_MESSAGE);
+    createErrorMessage(FILE_TYPES_ERROR_MESSAGE);
     removeErrorElementTimeout();
   }
 };
