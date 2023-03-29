@@ -1,4 +1,4 @@
-const SCALE_STEP = 25;
+const ZOOM_STEP = 25;
 const PERCENT_DIVIDER = 100;
 const MIN_ZOOM = '25%';
 const MAX_ZOOM = '100%';
@@ -13,21 +13,25 @@ const changeZoomPhoto = (value) => {
 };
 
 const zoomOutValue = (value) => {
-  zoomInput.value = `${+value.replace('%', '') - SCALE_STEP}%`;
+  zoomInput.value = `${+value.replace('%', '') - ZOOM_STEP}%`;
 };
 
 const zoomInValue = (value) => {
-  zoomInput.value = `${+value.replace('%', '') + SCALE_STEP}%`;
+  zoomInput.value = `${+value.replace('%', '') + ZOOM_STEP}%`;
 };
 
-const onZoomOutButtonClick = () => {
+const onZoomOutButtonClick = (evt) => {
+  evt.preventDefault();
+
   if (zoomInput.value !== MIN_ZOOM) {
     zoomOutValue(zoomInput.value);
     changeZoomPhoto(zoomInput.value);
   }
 };
 
-const onZoomInButtonClick = () => {
+const onZoomInButtonClick = (evt) => {
+  evt.preventDefault();
+
   if (zoomInput.value !== MAX_ZOOM) {
     zoomInValue(zoomInput.value);
     changeZoomPhoto(zoomInput.value);

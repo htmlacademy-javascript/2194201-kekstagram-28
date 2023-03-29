@@ -68,8 +68,6 @@ const showBigPhotoElement = () => {
   bigPhotoElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
-  loadCommentsButton.addEventListener('click', onLoadCommentsButtonClick);
-  bigPhotoCloseButton.addEventListener('click', onBigPhotoCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
@@ -78,20 +76,18 @@ const hiddenBigPhotoElement = () => {
   document.body.classList.remove('modal-open');
   loadCommentsButton.classList.remove('hidden');
 
-  loadCommentsButton.removeEventListener('click', onLoadCommentsButtonClick);
-  bigPhotoCloseButton.removeEventListener('click', onBigPhotoCloseButtonClick);
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
-function onLoadCommentsButtonClick(evt) {
+const onLoadCommentsButtonClick = (evt) => {
   evt.preventDefault();
   renderComments();
-}
+};
 
-function onBigPhotoCloseButtonClick(evt) {
+const onBigPhotoCloseButtonClick = (evt) => {
   evt.preventDefault();
   hiddenBigPhotoElement();
-}
+};
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt)) {
@@ -100,4 +96,9 @@ function onDocumentKeydown(evt) {
   }
 }
 
-export { showBigPhotoElement, fillPhotoData };
+const initBigPhotoActions = () => {
+  loadCommentsButton.addEventListener('click', onLoadCommentsButtonClick);
+  bigPhotoCloseButton.addEventListener('click', onBigPhotoCloseButtonClick);
+};
+
+export { showBigPhotoElement, fillPhotoData, initBigPhotoActions };

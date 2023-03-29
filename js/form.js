@@ -1,10 +1,10 @@
 import { isEscapeKey } from './utils.js';
 import { addValidator, validatePristine, resetPristine } from './form-validation.js';
-import { initFiltersActions, createSlider, resetPhotoStyles, resetFilter } from './filters.js';
+import { activateFilters, resetPhotoStyles, resetFilter } from './filters.js';
 import { sendData } from './api.js';
 import { createErrorMessage, createSuccessMessage } from './messages.js';
 import { insertPhotoInImageElement } from './check-file-types.js';
-import { activateScale } from './form-scale.js';
+import { activateScale } from './form-zoom.js';
 
 const editPhotoElement = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
@@ -56,7 +56,10 @@ const onEditPhotoFormSubmit = (evt) => {
 
 const onUploadPhotoChange = () => insertPhotoInImageElement();
 
-const onEditPhotoCloseButtonClick = () => hiddenEditPhotoElement();
+const onEditPhotoCloseButtonClick = (evt) => {
+  evt.preventDefault();
+  hiddenEditPhotoElement();
+};
 
 function onDocumentKeydown(evt) {
   if (isEscapeKey(evt) && !hashTagInput.matches(':focus') && !descriptionInput.matches(':focus') && !document.querySelector('.error')) {
@@ -71,9 +74,8 @@ const initFormActions = () => {
   editPhotoCloseButton.addEventListener('click', onEditPhotoCloseButtonClick);
 
   activateScale();
+  activateFilters();
   addValidator();
-  createSlider();
-  initFiltersActions();
 };
 
 export { initFormActions, showEditPhotoElement, hiddenEditPhotoElement };

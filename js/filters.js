@@ -115,9 +115,11 @@ const onLevelSliderUpdate = () => {
   imageElement.style.filter = `${typeEffect}(${valueCurrent + typeUnit})`;
 };
 
-const initFiltersActions = () => {
+const activateFilters = () => {
+  createSlider();
+
   filterListElement.addEventListener('change', onFilterItemChange);
   levelSliderElement.noUiSlider.on('update', onLevelSliderUpdate);
 };
 
-export { initFiltersActions, createSlider, resetFilter, resetPhotoStyles };
+export { activateFilters, resetFilter, resetPhotoStyles };
