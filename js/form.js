@@ -3,8 +3,8 @@ import { addValidator, validatePristine, resetPristine } from './form-validation
 import { activateFilters, resetPhotoStyles, resetFilter } from './filters.js';
 import { sendData } from './api.js';
 import { createErrorMessage, createSuccessMessage } from './messages.js';
-import { insertPhotoInImageElement } from './check-file-types.js';
-import { activateScale } from './form-zoom.js';
+import { checkFileTypes } from './check-file-types.js';
+import { activateZoom } from './form-zoom.js';
 
 const editPhotoElement = document.querySelector('.img-upload__overlay');
 const uploadPhotoInput = document.querySelector('.img-upload__input');
@@ -54,7 +54,7 @@ const onEditPhotoFormSubmit = (evt) => {
   }
 };
 
-const onUploadPhotoChange = () => insertPhotoInImageElement();
+const onUploadPhotoChange = () => checkFileTypes();
 
 const onEditPhotoCloseButtonClick = (evt) => {
   evt.preventDefault();
@@ -73,7 +73,7 @@ const initFormActions = () => {
   editPhotoForm.addEventListener('submit', onEditPhotoFormSubmit);
   editPhotoCloseButton.addEventListener('click', onEditPhotoCloseButtonClick);
 
-  activateScale();
+  activateZoom();
   activateFilters();
   addValidator();
 };

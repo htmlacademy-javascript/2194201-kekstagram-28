@@ -38,9 +38,9 @@ const onZoomInButtonClick = (evt) => {
   }
 };
 
-const activateScale = () => {
+const activateZoom = () => {
   zoomOutButton.addEventListener('click', onZoomOutButtonClick);
   zoomInButton.addEventListener('click', onZoomInButtonClick);
 };
 
-export { activateScale };
+export { activateZoom };

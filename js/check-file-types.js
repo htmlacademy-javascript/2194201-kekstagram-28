@@ -10,22 +10,22 @@ const imageElement = document.querySelector('.img-upload__preview img');
 
 const removeErrorElementTimeout = debounce(() => removeErrorElement(), FILE_TYPES_ERROR_TIMER);
 
-const checkFileTypes = (fileName) => FILE_TYPES.some((type) => fileName.endsWith(type));
+const insertImage = (file) => {
+  imageElement.src = URL.createObjectURL(file);
+};
 
-const insertPhotoInImageElement = () => {
+const checkFileTypes = () => {
   const file = uploadPhotoInput.files[0];
   const fileName = file.name.toLowerCase();
+  const isImage = FILE_TYPES.some((type) => fileName.endsWith(type));
 
-  if (checkFileTypes(fileName)) {
+  if (isImage) {
+    insertImage(file);
     showEditPhotoElement();
-
-    imageElement.src = URL.createObjectURL(file);
   } else {
     createErrorElement(FILE_TYPES_ERROR_MESSAGE);
     removeErrorElementTimeout();
-
-    uploadPhotoInput.value = '';
   }
 };
 
-export { insertPhotoInImageElement };
+export { checkFileTypes };

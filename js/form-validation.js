@@ -12,17 +12,23 @@ const pristine = new Pristine(editPhotoForm, {
   errorTextClass: 'img-upload__error',
 }, false);
 
-const checkHashTagRegExp = (hashTags) => hashTags.some((hashTag) => !REG_EXP.test(hashTag));
+const isHashTagRegExp = (hashTags) => hashTags.some((hashTag) => !REG_EXP.test(hashTag));
 
-const checkHashTagSame = (hashTags) => hashTags.some((item, index) => hashTags.indexOf(item.toLowerCase()) !== index);
+const isHashTagSame = (hashTags) => hashTags.some((item, index) => hashTags.indexOf(item.toLowerCase()) !== index);
 
-const checkHashTagsLength = (hashTags) => hashTags.length > MAX_HASH_TAGS;
+const isHashTagsLength = (hashTags) => hashTags.length > MAX_HASH_TAGS;
 
-const validateHashTags = () => {
-  const hashTags = hashTagInput.value.trim().split(' ');
-  const isValid = checkHashTagRegExp(hashTags) || checkHashTagSame(hashTags) || checkHashTagsLength(hashTags);
+const createHashTagsArray = (value) => value.trim().split(' ').filter((item) => item);
 
-  return !hashTagInput.value.length ? isValid : !isValid;
+const validateHashTags = (value) => {
+  if (!value) {
+    return true;
+  }
+
+  const hashTags = createHashTagsArray(value);
+  const isValid = isHashTagRegExp(hashTags) || isHashTagSame(hashTags) || isHashTagsLength(hashTags);
+
+  return !isValid;
 };
 
 const addValidator = () => pristine.addValidator(hashTagInput, validateHashTags, MESSAGE_ERROR_HASH_TAG);
