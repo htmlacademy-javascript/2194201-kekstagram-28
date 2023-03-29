@@ -1,6 +1,3 @@
-let typeEffect = '';
-let typeUnit = '';
-
 const FILTER_SETTINGS = {
   chrome: {
     min: 0,
@@ -35,6 +32,9 @@ const FILTER_SETTINGS = {
     css: 'brightness',
   },
 };
+
+let typeEffect = '';
+let typeUnit = '';
 
 const imageElement = document.querySelector('.img-upload__preview img');
 const filterListElement = document.querySelector('.img-upload__effects');
