@@ -1,4 +1,4 @@
-import { createErrorElement, removeErrorElement, debounce } from './utils.js';
+import { createErrorMessage, removeErrorMessage, debounce } from './utils.js';
 import { showEditPhotoElement } from './form.js';
 
 const FILE_TYPES = ['gif', 'png', 'jpeg', 'jpg'];
@@ -8,7 +8,7 @@ const FILE_TYPES_ERROR_TIMER = 5000;
 const uploadPhotoInput = document.querySelector('.img-upload__input');
 const imageElement = document.querySelector('.img-upload__preview img');
 
-const removeErrorElementTimeout = debounce(() => removeErrorElement(), FILE_TYPES_ERROR_TIMER);
+const removeErrorMessageTimeout = debounce(() => removeErrorMessage(), FILE_TYPES_ERROR_TIMER);
 
 const insertImage = (file) => {
   imageElement.src = URL.createObjectURL(file);
@@ -23,8 +23,8 @@ const checkFileTypes = () => {
     insertImage(file);
     showEditPhotoElement();
   } else {
-    createErrorElement(FILE_TYPES_ERROR_MESSAGE);
-    removeErrorElementTimeout();
+    createErrorMessage(FILE_TYPES_ERROR_MESSAGE);
+    removeErrorMessageTimeout();
   }
 };
 

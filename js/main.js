@@ -1,6 +1,6 @@
 import { renderPhotos } from './render-photos.js';
 import { getData } from './api.js';
-import { createErrorElement } from './utils.js';
+import { createErrorMessage } from './utils.js';
 import { initFormActions } from './form.js';
 import { initSortPhotosActions } from './sort.js';
 import { initBigPhotoActions } from './big-photo.js';
@@ -13,6 +13,6 @@ getData()
     initFormActions();
   })
   .catch((err) => {
-    createErrorElement(err.message);
+    createErrorMessage(err.message);
   }
   );

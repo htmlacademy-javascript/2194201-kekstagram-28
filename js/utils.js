@@ -9,18 +9,15 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-const renderElement = (element) => document.body.append(element);
+const renderMessage = (element) => document.body.append(element);
 
-const createErrorElement = (message) => {
+const createErrorMessage = (message) => {
   const div = document.createElement('div');
   div.classList.add('error-message');
   div.textContent = message;
-  renderElement(div);
+  renderMessage(div);
 };
 
-const removeErrorElement = () => {
-  const errorMessage = document.querySelector('.error-message');
-  errorMessage.remove();
-};
+const removeErrorMessage = () => document.querySelector('.error-message').remove();
 
-export { isEscapeKey, debounce, renderElement, createErrorElement, removeErrorElement };
+export { isEscapeKey, debounce, renderMessage, createErrorMessage, removeErrorMessage };

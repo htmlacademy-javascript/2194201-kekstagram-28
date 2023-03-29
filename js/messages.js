@@ -1,43 +1,38 @@
-import { isEscapeKey, renderElement } from './utils.js';
+import { isEscapeKey, renderMessage } from './utils.js';
 import { hiddenEditPhotoElement } from './form.js';
 
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 
+let errorMessageClone;
+let successMessageClone;
+
 const createErrorMessage = () => {
-  const errorMessage = errorTemplate.cloneNode(true);
-  renderElement(errorMessage);
+  errorMessageClone = errorTemplate.cloneNode(true);
+  renderMessage(errorMessageClone);
 
   document.addEventListener('keydown', onErrorMessageKeydown);
-  errorMessage.addEventListener('click', onErrorMessageClick);
+  errorMessageClone.addEventListener('click', onErrorMessageClick);
 };
 
 const createSuccessMessage = () => {
-  const successMessage = successTemplate.cloneNode(true);
-  renderElement(successMessage);
+  successMessageClone = successTemplate.cloneNode(true);
+  renderMessage(successMessageClone);
 
   document.addEventListener('keydown', onSuccessMessageKeydown);
-  successMessage.addEventListener('click', onSuccessMessageClick);
+  successMessageClone.addEventListener('click', onSuccessMessageClick);
 
   hiddenEditPhotoElement();
 };
 
 const removeErrorMessage = () => {
-  const errorMessage = document.querySelector('.error');
-
+  errorMessageClone.remove();
   document.removeEventListener('keydown', onErrorMessageKeydown);
-  errorMessage.removeEventListener('click', onErrorMessageClick);
-
-  errorMessage.remove();
 };
 
 const removeSuccessMessage = () => {
-  const successMessage = document.querySelector('.success');
-
+  successMessageClone.remove();
   document.removeEventListener('keydown', onSuccessMessageKeydown);
-  successMessage.removeEventListener('click', onSuccessMessageClick);
-
-  successMessage.remove();
 };
 
 function onErrorMessageKeydown(evt) {
