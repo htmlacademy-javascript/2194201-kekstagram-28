@@ -1,17 +1,18 @@
 import { renderPhotos } from './render-photos.js';
 import { getData } from './api.js';
-import { createErrorLoadMessage } from './fetch-messages.js';
-import { initUploadPhotoActions } from './upload-photo.js';
-import { initSortPhotosActions } from './sort-photos.js';
+import { createErrorElement } from './utils.js';
+import { initFormActions } from './form.js';
+import { initSortPhotosActions } from './sort.js';
+import { initBigPhotoActions } from './big-photo.js';
 
 getData()
   .then((photos) => {
     renderPhotos(photos);
     initSortPhotosActions(photos);
+    initBigPhotoActions();
+    initFormActions();
   })
   .catch((err) => {
-    createErrorLoadMessage(err.message);
+    createErrorElement(err.message);
   }
   );
-
-initUploadPhotoActions();

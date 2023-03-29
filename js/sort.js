@@ -1,21 +1,21 @@
-import { getRandomInteger } from './utils.js';
 import { renderPhotos } from './render-photos.js';
 import { debounce } from './utils.js';
 
 const MAX_RANDOM_PHOTOS = 10;
 const RERENDER_DELAY = 500;
-const sortPhotosSection = document.querySelector('.img-filters');
+
+const sortPhotosElement = document.querySelector('.img-filters');
 const sortButtons = document.querySelectorAll('.img-filters__button');
 
 const removePhotos = () => {
-  const photosElements = document.querySelectorAll('.picture');
-  photosElements.forEach((element) => element.remove());
+  const imageElements = document.querySelectorAll('.picture');
+  imageElements.forEach((element) => element.remove());
 };
 
-const sortRandom = (photos) => {
-  const photosTemp = [...photos];
-  return Array.from({ length: MAX_RANDOM_PHOTOS }, () => photosTemp.splice(getRandomInteger(0, photosTemp.length - 1), 1)[0]);
-};
+const sortRandom = (photos) => photos
+  .slice()
+  .sort(() => Math.random() - 0.5)
+  .slice(0, MAX_RANDOM_PHOTOS);
 
 const compareComments = (itemA, itemB) => itemB.comments.length - itemA.comments.length;
 
@@ -46,13 +46,13 @@ const updatePhotos = (sortType, photos) => {
   }
 };
 
-function onSortButtonClick(sortType, callback) {
+const onSortButtonClick = (sortType, callback) => {
   chooseActiveButton(sortType);
   callback();
-}
+};
 
-export const initSortPhotosActions = (photos) => {
-  sortPhotosSection.classList.remove('img-filters--inactive');
+const initSortPhotosActions = (photos) => {
+  sortPhotosElement.classList.remove('img-filters--inactive');
 
   sortButtons.forEach((button) => {
     const sortType = button.getAttribute('id');
@@ -64,3 +64,5 @@ export const initSortPhotosActions = (photos) => {
     });
   });
 };
+
+export { initSortPhotosActions };

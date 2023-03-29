@@ -1,7 +1,12 @@
-import { onPhotoClick } from './open-big-photo.js';
+import { showBigPhotoElement, fillPhotoData } from './big-photo.js';
 
-const photoContainer = document.querySelector('.pictures');
+const imageElement = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
+
+const onPhotoClick = (photo) => {
+  showBigPhotoElement();
+  fillPhotoData(photo);
+};
 
 const createPhoto = (photo) => {
   const photoClone = photoTemplate.cloneNode(true);
@@ -18,7 +23,6 @@ const createPhoto = (photo) => {
   return photoClone;
 };
 
-export const renderPhotos = (photos) => {
-  photos.forEach((photo) => photoContainer.append(createPhoto(photo)));
-};
+const renderPhotos = (photos) => photos.forEach((photo) => imageElement.append(createPhoto(photo)));
 
+export { renderPhotos };

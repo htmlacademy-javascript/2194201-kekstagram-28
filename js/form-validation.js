@@ -1,10 +1,9 @@
-const editPhotoForm = document.querySelector('.img-upload__form');
-const hashTagField = document.querySelector('.text__hashtags');
-
 const REG_EXP = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASH_TAGS = 5;
+const MESSAGE_ERROR_HASH_TAG = `Не более ${MAX_HASH_TAGS} уникальных хэштэгов < 20 символов каждый. Сначала #, а после - буквы и цифры!`;
 
-const messageErrorHagTag = `Не более ${MAX_HASH_TAGS} уникальных хэштэгов < 20 символов каждый. Сначала #, а после - буквы и цифры!`;
+const editPhotoForm = document.querySelector('.img-upload__form');
+const hashTagInput = document.querySelector('.text__hashtags');
 
 const pristine = new Pristine(editPhotoForm, {
   classTo: 'img-upload__field-wrapper',
@@ -13,19 +12,28 @@ const pristine = new Pristine(editPhotoForm, {
   errorTextClass: 'img-upload__error',
 }, false);
 
-const checkHashTagRegExp = (hashTags) => hashTags.some((hashTag) => !REG_EXP.test(hashTag));
+const isHashTagRegExp = (hashTags) => hashTags.some((hashTag) => !REG_EXP.test(hashTag));
 
-const checkHashTagSame = (hashTags) => hashTags.some((item, index) => hashTags.indexOf(item.toLowerCase()) !== index);
+const isHashTagSame = (hashTags) => hashTags.some((item, index) => hashTags.indexOf(item.toLowerCase()) !== index);
 
-const checkHashTagsLength = (hashTags) => hashTags.length > MAX_HASH_TAGS;
+const isHashTagsLength = (hashTags) => hashTags.length > MAX_HASH_TAGS;
 
-const validateHashTags = () => {
-  const hashTags = hashTagField.value.trim().split(' ');
-  const isValid = checkHashTagRegExp(hashTags) || checkHashTagSame(hashTags) || checkHashTagsLength(hashTags);
+const createHashTagsArray = (value) => value.trim().split(' ').filter((item) => item);
 
-  return !hashTagField.value.length ? isValid : !isValid;
+const validateHashTags = (value) => {
+  if (!value) {
+    return true;
+  }
+
+  const hashTags = createHashTagsArray(value);
+  const isValid = isHashTagRegExp(hashTags) || isHashTagSame(hashTags) || isHashTagsLength(hashTags);
+
+  return !isValid;
 };
 
-pristine.addValidator(hashTagField, validateHashTags, messageErrorHagTag);
+const addValidator = () => pristine.addValidator(hashTagInput, validateHashTags, MESSAGE_ERROR_HASH_TAG);
 
-export const validate = () => pristine.validate();
+const resetPristine = () => pristine.reset();
+const validatePristine = () => pristine.validate();
+
+export { addValidator, validatePristine, resetPristine };

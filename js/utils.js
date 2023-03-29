@@ -1,10 +1,10 @@
-export const getRandomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+const getRandomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-export const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-export const isEscapeKey = (evt) => evt.key === 'Escape';
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export const debounce = (callback, timeoutDelay) => {
+const debounce = (callback, timeoutDelay) => {
   let timeoutId;
 
   return (...rest) => {
@@ -12,3 +12,19 @@ export const debounce = (callback, timeoutDelay) => {
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 };
+
+const renderElement = (element) => document.body.append(element);
+
+const createErrorElement = (message) => {
+  const div = document.createElement('div');
+  div.classList.add('error-message');
+  div.textContent = message;
+  renderElement(div);
+};
+
+const removeErrorElement = () => {
+  const errorMessage = document.querySelector('.error-message');
+  errorMessage.remove();
+};
+
+export { getRandomInteger, getRandomArrayElement, isEscapeKey, debounce, renderElement, createErrorElement, removeErrorElement };

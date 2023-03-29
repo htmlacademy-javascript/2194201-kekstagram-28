@@ -15,6 +15,8 @@ const load = (route, method, body = null) =>
       throw new Error('Не удалось загрузить фотографии. Попробуйте обновить страницу!');
     });
 
-export const getData = () => load(Route.GET_DATA, Method.GET);
+const getData = () => load(Route.GET_DATA, Method.GET);
 
-export const sendData = (body) => load(Route.SEND_DATA, Method.POST, body);
+const sendData = (body) => load(Route.SEND_DATA, Method.POST, body);
+
+export { getData, sendData };
