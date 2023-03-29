@@ -18,9 +18,6 @@ const createErrorMessage = (message) => {
   renderMessage(div);
 };
 
-const removeErrorElement = () => {
-  const errorMessage = document.querySelector('.error-message');
-  errorMessage.remove();
-};
+const removeErrorMessage = () => document.querySelector('.error-message').remove();
 
-export { isEscapeKey, debounce, renderMessage, createErrorMessage, removeErrorElement };
+export { isEscapeKey, debounce, renderMessage, createErrorMessage, removeErrorMessage };
