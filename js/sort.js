@@ -7,7 +7,7 @@ const RERENDER_DELAY = 500;
 const sortPhotosElement = document.querySelector('.img-filters');
 const sortButtons = document.querySelector('.img-filters__form');
 
-const removePhotos = () => document.querySelectorAll('.picture').forEach((element) => element.remove());
+const removePhotos = (elements) => elements.forEach((element) => element.remove());
 
 const sortRandom = (data) => data.sort(() => Math.random() - 0.5).slice(0, MAX_RANDOM_PHOTOS);
 
@@ -28,7 +28,7 @@ const updatePhotos = (id, data) => {
     photoSort = sortDiscussed(photoSort);
   }
 
-  removePhotos();
+  removePhotos(document.querySelectorAll('.picture'));
   renderPhotos(photoSort);
 };
 

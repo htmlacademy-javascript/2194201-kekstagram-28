@@ -101,4 +101,9 @@ const initBigPhotoActions = () => {
   bigPhotoCloseButton.addEventListener('click', onBigPhotoCloseButtonClick);
 };
 
-export { showBigPhotoElement, fillPhotoData, initBigPhotoActions };
+const showBigPhoto = (photo) => {
+  showBigPhotoElement();
+  fillPhotoData(photo);
+};
+
+export { showBigPhoto, initBigPhotoActions };
