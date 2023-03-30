@@ -2,7 +2,7 @@ const BASE_URL = 'https://28.javascript.pages.academy/kekstagram';
 const MESSAGE_ERROR = 'Не удалось загрузить фотографии.Попробуйте обновить страницу!';
 const Route = {
   GET_DATA: '/data',
-  SEND_DATA: '/',
+  SEND_DATA: '',
 };
 const Method = {
   GET: 'GET',
