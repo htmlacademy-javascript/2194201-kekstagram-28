@@ -5,59 +5,47 @@ const MAX_RANDOM_PHOTOS = 10;
 const RERENDER_DELAY = 500;
 
 const sortPhotosElement = document.querySelector('.img-filters');
-const sortButtons = document.querySelectorAll('.img-filters__button');
+const sortButtons = document.querySelector('.img-filters__form');
 
 const removePhotos = () => document.querySelectorAll('.picture').forEach((element) => element.remove());
 
-const sortRandom = (photos) => photos
-  .slice()
-  .sort(() => Math.random() - 0.5)
-  .slice(0, MAX_RANDOM_PHOTOS);
+const sortRandom = (data) => data.sort(() => Math.random() - 0.5).slice(0, MAX_RANDOM_PHOTOS);
 
-const compareComments = (itemA, itemB) => itemB.comments.length - itemA.comments.length;
+const sortDiscussed = (data) => data.sort((a, b) => b.comments.length - a.comments.length);
 
-const sortDiscussed = (photos) => photos.slice().sort(compareComments);
-
-const chooseActiveButton = (sortType) => {
-  sortButtons.forEach((button) => {
-    if (button.id !== sortType) {
-      button.classList.remove('img-filters__button--active');
-    } else {
-      button.classList.add('img-filters__button--active');
-    }
-  });
+const chooseActiveButton = (buttonActive, button) => {
+  buttonActive.classList.remove('img-filters__button--active');
+  button.classList.add('img-filters__button--active');
 };
 
-const updatePhotos = (sortType, photos) => {
-  removePhotos();
+const updatePhotos = (id, data) => {
+  let photoSort = data.slice();
 
-  switch (sortType) {
-    case 'filter-random':
-      renderPhotos(sortRandom(photos));
-      break;
-    case 'filter-discussed':
-      renderPhotos(sortDiscussed(photos));
-      break;
-    default:
-      renderPhotos(photos);
+  if (id === 'filter-random') {
+    photoSort = sortRandom(photoSort);
   }
+  if (id === 'filter-discussed') {
+    photoSort = sortDiscussed(photoSort);
+  }
+
+  removePhotos();
+  renderPhotos(photoSort);
 };
 
-const onSortButtonClick = (sortType, callback) => {
-  chooseActiveButton(sortType);
-  callback();
+const onSortButtonClick = (button) => {
+  chooseActiveButton(document.querySelector('.img-filters__button--active'), button);
 };
+
+const rerenderTimeout = debounce((id, data) => updatePhotos(id, data), RERENDER_DELAY);
 
 const initSortPhotosActions = (photos) => {
   sortPhotosElement.classList.remove('img-filters--inactive');
 
-  sortButtons.forEach((button) => {
-    const rerenderTimeout = debounce(() => updatePhotos(button.id, photos), RERENDER_DELAY);
-
-    button.addEventListener('click', (evt) => {
-      evt.preventDefault();
-      onSortButtonClick(button.id, rerenderTimeout);
-    });
+  sortButtons.addEventListener('click', (evt) => {
+    if (evt.target.closest('.img-filters__button') && !evt.target.closest('.img-filters__button--active')) {
+      onSortButtonClick(evt.target);
+      rerenderTimeout(evt.target.id, photos);
+    }
   });
 };
 
