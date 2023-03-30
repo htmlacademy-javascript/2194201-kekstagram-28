@@ -34,11 +34,7 @@ const hiddenEditPhotoElement = () => {
 };
 
 const blockSubmitButton = () => {
-  submitButton.disabled = true;
-};
-
-const unblockSubmitButton = () => {
-  submitButton.disabled = false;
+  submitButton.disabled = !submitButton.disabled;
 };
 
 const onEditPhotoFormSubmit = (evt) => {
@@ -50,7 +46,7 @@ const onEditPhotoFormSubmit = (evt) => {
     sendData(new FormData(evt.target))
       .then(createSuccessMessage)
       .catch(createErrorMessage)
-      .finally(unblockSubmitButton);
+      .finally(blockSubmitButton);
   }
 };
 
