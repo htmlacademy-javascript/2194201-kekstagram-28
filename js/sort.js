@@ -33,7 +33,7 @@ const updatePhotos = (id, data) => {
 };
 
 const onSortButtonClick = (button) => {
-  chooseActiveButton(document.querySelector('.img-filters__button--active'), button);
+  chooseActiveButton(sortButtons.querySelector('.img-filters__button--active'), button);
 };
 
 const rerenderTimeout = debounce((id, data) => updatePhotos(id, data), RERENDER_DELAY);
