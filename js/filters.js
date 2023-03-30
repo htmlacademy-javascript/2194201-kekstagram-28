@@ -33,14 +33,14 @@ const FILTER_SETTINGS = {
   },
 };
 
-let typeEffect = '';
-let typeUnit = '';
-
 const imageElement = document.querySelector('.img-upload__preview img');
 const filterListElement = document.querySelector('.img-upload__effects');
 const sliderElement = document.querySelector('.img-upload__effect-level');
 const levelSliderElement = document.querySelector('.effect-level__slider');
 const levelFilterElement = document.querySelector('.effect-level__value');
+
+let typeEffect = '';
+let typeUnit = '';
 
 const createSlider = () => {
   noUiSlider.create(levelSliderElement, {

@@ -1,11 +1,10 @@
-import { showBigPhotoElement, fillPhotoData } from './big-photo.js';
+import { showBigPhoto } from './big-photo.js';
 
 const imageElement = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 const onPhotoClick = (photo) => {
-  showBigPhotoElement();
-  fillPhotoData(photo);
+  showBigPhoto(photo);
 };
 
 const createPhoto = (photo) => {
