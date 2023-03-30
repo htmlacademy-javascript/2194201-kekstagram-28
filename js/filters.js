@@ -1,35 +1,35 @@
-const FILTER_SETTINGS = {
-  chrome: {
-    min: 0,
-    max: 1,
-    step: 0.1,
-    css: 'grayscale',
+const FilterSettings = {
+  CHROME: {
+    MIN: 0,
+    MAX: 1,
+    STEP: 0.1,
+    CSS: 'grayscale',
   },
-  sepia: {
-    min: 0,
-    max: 1,
-    step: 0.1,
-    css: 'sepia',
+  SEPIA: {
+    MIN: 0,
+    MAX: 1,
+    STEP: 0.1,
+    CSS: 'sepia',
   },
-  marvin: {
-    min: 0,
-    max: 100,
-    step: 1,
-    css: 'invert',
-    unit: '%',
+  MARVIN: {
+    MIN: 0,
+    MAX: 100,
+    STEP: 1,
+    CSS: 'invert',
+    UNIT: '%',
   },
-  phobos: {
-    min: 0,
-    max: 3,
-    step: 0.1,
-    css: 'blur',
-    unit: 'px',
+  PHOBOS: {
+    MIN: 0,
+    MAX: 3,
+    STEP: 0.1,
+    CSS: 'blur',
+    UNIT: 'px',
   },
-  heat: {
-    min: 1,
-    max: 3,
-    step: 0.1,
-    css: 'brightness',
+  HEAT: {
+    MIN: 1,
+    MAX: 3,
+    STEP: 0.1,
+    CSS: 'brightness',
   },
 };
 
@@ -77,13 +77,13 @@ const updateOptionsSlider = (min = 0, max = 100, step = 1) => {
 };
 
 const updateFilter = (filter) => {
-  typeEffect = FILTER_SETTINGS?.[filter]?.css ?? '';
-  typeUnit = FILTER_SETTINGS?.[filter]?.unit ?? '';
+  typeEffect = FilterSettings?.[filter]?.CSS ?? '';
+  typeUnit = FilterSettings?.[filter]?.UNIT ?? '';
   imageElement.className = '';
 
-  if (filter !== 'none') {
+  if (filter !== 'NONE') {
     sliderElement.classList.remove('hidden');
-    imageElement.classList.add(`effects__preview--${filter}`);
+    imageElement.classList.add(`effects__preview--${filter.toLowerCase()}`);
   } else {
     sliderElement.classList.add('hidden');
     imageElement.style.filter = null;
@@ -103,9 +103,9 @@ const resetPhotoStyles = () => {
 
 const onFilterItemChange = (evt) => {
   if (evt.target.closest('.effects__radio')) {
-    const filter = evt.target.value;
+    const filter = evt.target.value.toUpperCase();
     updateFilter(filter);
-    updateOptionsSlider(FILTER_SETTINGS?.[filter]?.min, FILTER_SETTINGS?.[filter]?.max, FILTER_SETTINGS?.[filter]?.step);
+    updateOptionsSlider(FilterSettings?.[filter]?.MIN, FilterSettings?.[filter]?.MAX, FilterSettings?.[filter]?.STEP);
   }
 };
 
