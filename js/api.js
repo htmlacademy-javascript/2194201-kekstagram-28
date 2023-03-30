@@ -1,7 +1,8 @@
 const BASE_URL = 'https://28.javascript.pages.academy/kekstagram';
+const MESSAGE_ERROR = 'Не удалось загрузить фотографии.Попробуйте обновить страницу!';
 const Route = {
   GET_DATA: '/data',
-  SEND_DATA: '/s',
+  SEND_DATA: '/',
 };
 const Method = {
   GET: 'GET',
@@ -12,7 +13,7 @@ const load = (route, method, body = null) =>
   fetch(BASE_URL + route, { method, body })
     .then((response) => response.json())
     .catch(() => {
-      throw new Error('Не удалось загрузить фотографии. Попробуйте обновить страницу!');
+      throw new Error(MESSAGE_ERROR);
     });
 
 const getData = () => load(Route.GET_DATA, Method.GET);

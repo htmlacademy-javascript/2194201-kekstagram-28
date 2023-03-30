@@ -10,9 +10,10 @@ getData()
     renderPhotos(photos);
     initSortPhotosActions(photos);
     initBigPhotoActions();
-    initFormActions();
   })
   .catch((err) => {
     createErrorMessage(err.message);
   }
   );
+
+initFormActions();

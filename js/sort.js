@@ -7,10 +7,7 @@ const RERENDER_DELAY = 500;
 const sortPhotosElement = document.querySelector('.img-filters');
 const sortButtons = document.querySelectorAll('.img-filters__button');
 
-const removePhotos = () => {
-  const imageElements = document.querySelectorAll('.picture');
-  imageElements.forEach((element) => element.remove());
-};
+const removePhotos = () => document.querySelectorAll('.picture').forEach((element) => element.remove());
 
 const sortRandom = (photos) => photos
   .slice()
@@ -23,7 +20,7 @@ const sortDiscussed = (photos) => photos.slice().sort(compareComments);
 
 const chooseActiveButton = (sortType) => {
   sortButtons.forEach((button) => {
-    if (button.getAttribute('id') !== sortType) {
+    if (button.id !== sortType) {
       button.classList.remove('img-filters__button--active');
     } else {
       button.classList.add('img-filters__button--active');
@@ -55,12 +52,11 @@ const initSortPhotosActions = (photos) => {
   sortPhotosElement.classList.remove('img-filters--inactive');
 
   sortButtons.forEach((button) => {
-    const sortType = button.getAttribute('id');
-    const rerenderTimeout = debounce(() => updatePhotos(sortType, photos), RERENDER_DELAY);
+    const rerenderTimeout = debounce(() => updatePhotos(button.id, photos), RERENDER_DELAY);
 
     button.addEventListener('click', (evt) => {
       evt.preventDefault();
-      onSortButtonClick(sortType, rerenderTimeout);
+      onSortButtonClick(button.id, rerenderTimeout);
     });
   });
 };
